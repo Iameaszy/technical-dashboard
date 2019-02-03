@@ -76,7 +76,7 @@ height:70px;
 export const NavMobile = styled.div`
         position: fixed;
         right: 0px;
-        top: 39px;
+        top: 51px;
         transition:all 1s ease 0s;
 
         .nav{
@@ -120,4 +120,8 @@ export const NavMobile = styled.div`
                 }
             }
         }
+
+    @media only screen and (min-width: 992px){
+        display:none;
+    }
 `;
