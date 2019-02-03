@@ -39,7 +39,7 @@ color:white;
     padding-top:10px;
         color:black;
     min-height: 100vh;
-
+    transition: 6s all;
     .menu{
         [class*="icon"]{
             padding:0 30px;
@@ -65,6 +65,11 @@ color:white;
             color:black;
         }
         
+    }
+    }
+
+    @media only screen and (max-width: 991px){
+        display:none;
     }
 }
 `;
