@@ -91,9 +91,13 @@ class SignInPage extends React.PureComponent {
         <div className="c-w">
           <div className="c t-c">
             <form
-              className="xs-12 sm-6 sm-off-3"
+              className="xs-12 sm-4 sm-off-4"
               onSubmit={this.onSubmit}
               onClick={(e) => e.stopPropagation()}>
+              <div className="l form-group">
+                <h4 className="welcome">Welcome</h4>
+                <h6 className="notice" >Sign in to continue</h6>
+              </div>
               <div className="form-group">
                 <input
                   name="email"
@@ -129,7 +133,7 @@ class SignInPage extends React.PureComponent {
                   <button
                     type="submit"
                     disabled={allFieldsAreValid === true ? false : true}>
-                    Sign in
+                    SIGN IN
                   </button>
                 )}
               </div>
@@ -139,8 +143,23 @@ class SignInPage extends React.PureComponent {
                   <p id="error">{message}</p>
                 )}
               </div>
-
-              <div className="xs-12">
+              
+              <div className="xs-16 sm-6">
+              <div className="form-group-checkbox l">
+              <label className="remember-label" for="remember">Keep me signed in </label>
+              <input
+                  className="form-control-checkbox"
+                  name="remember"
+                  id="remember"
+                  type="checkbox"
+                  placeholder="Password"
+                  required
+                  value={password.value}
+                  onChange={this.onChange}
+                />
+              </div>
+              </div>
+              <div className="xs-16 sm-6">
                 <Link
                   to="/forgot/password"
                   onClick={this.props.close_signup_modal}
@@ -149,15 +168,16 @@ class SignInPage extends React.PureComponent {
                 </Link>
               </div>
 
-              <div className="xs-12 sm-btn-container">
-                <div className="xs-12 sm-6">
+              <div className="social-btn-container xs-12 sm-btn-container">
+                <div className="xs-12">
                   <GoogleLogin
                     clientId={process.env.REACT_APP_GOOGLE_APP_ID}
                     buttonText=""
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
-                    className="sm-btn xs-12 sm-11"
+                    className="g-btn sm-btn xs-12"
                     type="button">
+                    <div className="xs-100">
                     <span className="xs-9">
                       <div className="c-w">
                         <div className="c t-c">Sign in with Google</div>
@@ -174,9 +194,10 @@ class SignInPage extends React.PureComponent {
                         </div>
                       </div>
                     </span>
+                    </div>
                   </GoogleLogin>
                 </div>
-                <div className="xs-12 sm-6">
+                <div className="xs-12">
                   <FacebookLogin
                     appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                     autoLoad={false}
@@ -186,7 +207,7 @@ class SignInPage extends React.PureComponent {
                     disableMobileRedirect={true}
                     render={(renderProps) => (
                       <button
-                        className="sm-btn xs-12 sm-11"
+                        className="sm-btn xs-12"
                         type="button"
                         onClick={renderProps.onClick}>
                         <span className="xs-9">

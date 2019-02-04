@@ -29,11 +29,18 @@ flex-direction:column;
 export const HomeStyle = styled.div`
 display:flex;
 color:white;
+
+.breadcrumb-span{
+    color: #796c6c;
+    font-size: 14px;
+    padding-right: 10px;
+}
 .content{
     width: 100%;
     text-align: center;
     line-height:6;
     background:#f1f2f7;
+    color: #000;
 }
 .side-bar{
     padding-top:10px;

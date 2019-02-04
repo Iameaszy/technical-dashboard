@@ -1,10 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export default styled.div`
+    background:#f1f2f7;
   #error{
-    color coral;
+    color:coral;
   }
 
+  
   .forgot-password{
         margin: auto;
         width: 100%;
@@ -23,8 +25,41 @@ export default styled.div`
     background: white;
     padding: 2em;
 
+    .welcome{
+      margin-bottom:0;
+    }
+    .notice{
+      font-weight: 300;
+      font-size: .9375rem;
+      color: #5d5959;
+    }
     @media (min-width: 768px) {
       border-radius: 5px;
+    }
+
+    .form-group-checkbox{
+      padding: 0 0.775em;
+      width: 100%;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content:flex-end;
+
+      .remember-label{
+        font-size:smaller;
+        color:#777777;
+      }
+      input[type='checkbox'] {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 5px;
+        border: 2px solid #8080ef;
+        margin-right: 10px;
+      }
+      input[type='checkbox']:checked {
+            background: #abd;
+        }
     }
     .form-group {
       padding: 0.775em;
@@ -46,14 +81,15 @@ export default styled.div`
         }
       }
       button[type="submit"] {
-        background: #009d91;
+        background: linear-gradient(to right, #a09df8, #328ee6);
         color: white;
-        font-size: 17px;
+        font-size: 16px;
         border: none;
         border-radius: 5px;
         padding: 0.9em 4.95em;
         letter-spacing: 0.5px;
         font-family: AvantGarde;
+        width:100%;
 
         &:hover,
         &:active,
@@ -63,6 +99,7 @@ export default styled.div`
       }
     }
     
+
     .form-control {
       width: 100%;
       padding: 1em 3em;
@@ -84,6 +121,13 @@ export default styled.div`
       &::placeholder {
         color: #b8b8b8;
       }
+    }
+  }
+
+  .g-btn{
+    margin-right:0;
+    &>span{
+      width:100%;
     }
   }
 
@@ -144,5 +188,10 @@ export default styled.div`
         float: left;
       }
     }
+  }
+
+.social-btn-container{
+    padding:20px;;
+    margin:0;
   }
 `;

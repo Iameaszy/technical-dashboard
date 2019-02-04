@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import {
-  FaHome, FaTh, FaShieldAlt, FaRegEnvelope, FaRegClone, FaUserFriends,
+  FaTh, FaShieldAlt, FaRegEnvelope, FaRegClone, FaUserFriends,
 } from 'react-icons/fa';
 import { TiHomeOutline } from 'react-icons/ti';
 import { connect } from 'react-redux';
-import Navbar from '../shared-components/navbar';
+import NavbarPage from '../shared-components/navbar';
 import Footer from '../shared-components/footer';
 import { HomeStyle } from '../shared-components/dashboard/index.style';
 import toggle_actions from '../redux/actions/toggle';
@@ -26,7 +26,7 @@ export class DefaultLayout extends React.Component {
         render={matchProps => (
           <div className="DefaultLayout">
             <ModalLayout />
-            <Navbar canSearch={canSearch} />
+            <NavbarPage canSearch={canSearch} />
             <HomeStyle>
               <div className="side-bar">
                 <div className="fa-home menu">
