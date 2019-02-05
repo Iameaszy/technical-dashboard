@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const HomeStyle = styled.div`
+export const SecurityStyle = styled.div`
         padding:0 40px;
         background:white-space;
         .header{
@@ -10,9 +10,6 @@ export const HomeStyle = styled.div`
 
             .title{
                 font-size:18px;
-                @media only screen and (max-width: 767px){
-                    margin:auto;
-                }
             }
 
             .breadcrumb{

@@ -1,30 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FacilityStyle } from './facility.style';
+import { SecurityStyle } from './security.style';
 import * as reportMethods from '../../redux/action-creators/reports';
 import reportActions from '../../redux/actions/reports';
 import Card from '../../shared-components/card';
 
 export class Home extends React.Component {
   componentDidMount() {
-    this.props.fetchFacilityReports();
+    this.props.fetchSecurityReports();
   }
 
   render() {
     const { type, reports } = this.props;
     return (
-      <FacilityStyle>
+      <SecurityStyle>
         <div className="header">
-          <div className="title">Facility Reports</div>
+          <div className="title">Security Reports</div>
           <nav className="breadcrumb">
             <span className="breadcrumb-span">Home</span>
             <span>/</span>
-            <span>Facility</span>
+            <span>Security</span>
           </nav>
         </div>
         <div className="home-content xs-12">
           {
-          type === reportActions.GET_FACILITY_REPORTS_SUCCESSFUL
+          type === reportActions.GET_SECURITY_REPORTS_SUCCESSFUL
           && Object.keys(reports).map((val, ind) => (
             <div key={ind} className="col xs-12 sm-6 md-4 ">
               <Card {...reports[val]} />
@@ -32,7 +32,7 @@ export class Home extends React.Component {
           ))
         }
         </div>
-      </FacilityStyle>
+      </SecurityStyle>
     );
   }
 }
@@ -42,8 +42,8 @@ const mapStatesToProps = states => ({
   reports: states.report.reports,
 });
 const mapDispatchToProps = dispatch => ({
-  fetchFacilityReports: () => {
-    dispatch(reportMethods.fetchFacilityReports());
+  fetchSecurityReports: () => {
+    dispatch(reportMethods.fetchSecurityReports());
   },
 });
 

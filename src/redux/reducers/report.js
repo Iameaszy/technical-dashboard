@@ -25,6 +25,45 @@ export default (state = init, payload) => {
         reports: payload.reports,
       };
 
+    case reportActions.GET_FACILITY_REPORTS_REQUEST:
+      return {
+        ...state,
+        action: reportActions.GET_FACILITY_REPORTS_REQUEST,
+      };
+
+    case reportActions.GET_FACILITY_REPORTS_FAILED:
+      return {
+        ...state,
+        action: reportActions.GET_FACILITY_REPORTS_FAILED,
+        reports: payload.reports,
+      };
+    case reportActions.GET_FACILITY_REPORTS_SUCCESSFUL:
+      return {
+        ...state,
+        action: reportActions.GET_FACILITY_REPORTS_SUCCESSFUL,
+        reports: payload.reports,
+      };
+
+
+    case reportActions.GET_SECURITY_REPORTS_REQUEST:
+      return {
+        ...state,
+        action: reportActions.GET_SECURITY_REPORTS_REQUEST,
+      };
+
+    case reportActions.GET_SECURITY_REPORTS_FAILED:
+      return {
+        ...state,
+        action: reportActions.GET_SECURITY_REPORTS_FAILED,
+        reports: payload.reports,
+      };
+    case reportActions.GET_SECURITY_REPORTS_SUCCESSFUL:
+      return {
+        ...state,
+        action: reportActions.GET_SECURITY_REPORTS_SUCCESSFUL,
+        reports: payload.reports,
+      };
+
     default:
       return state;
   }

@@ -57,19 +57,62 @@ export const removeReport = reportId => async (dispatch) => {
     });
 };
 
-export const fetchReports = () => async (dispatch) => {
+export const fetchReports = count => async (dispatch) => {
   dispatch({
     type: reportActions.GET_REPORTS_REQUEST,
   });
-  reportsRef.once('value').then((snapshot) => {
-    dispatch({
-      type: reportActions.GET_REPORTS_SUCCESSFUL,
-      reports: snapshot.child('tkMCkiWomNV5O8vQcHELn2K9pKR2').val(),
-    });
-  })
-    .catch((err) => {
+  reportsRef.child('tkMCkiWomNV5O8vQcHELn2K9pKR2').limitToFirst(count || 20)
+    .once('value')
+    .then((snapshot) => {
       dispatch({
         type: reportActions.GET_REPORTS_SUCCESSFUL,
+        reports: snapshot.val(),
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: reportActions.GET_REPORTS_FAILED,
+        reports: err,
+      });
+    });
+};
+
+export const fetchFacilityReports = count => async (dispatch) => {
+  dispatch({
+    type: reportActions.GET_FACILITY_REPORTS_REQUEST,
+  });
+  reportsRef.child('tkMCkiWomNV5O8vQcHELn2K9pKR2').orderByChild('report_type').equalTo('Facility Report').limitToFirst(count || 20)
+    .once('value')
+    .then((snapshot) => {
+      dispatch({
+        type: reportActions.GET_FACILITY_REPORTS_SUCCESSFUL,
+        reports: snapshot.val(),
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: reportActions.GET_FACILITY_REPORTS_FAILED,
+        reports: err,
+      });
+    });
+};
+
+
+export const fetchSecurityReports = count => async (dispatch) => {
+  dispatch({
+    type: reportActions.GET_SECURITY_REPORTS_REQUEST,
+  });
+  reportsRef.child('tkMCkiWomNV5O8vQcHELn2K9pKR2').orderByChild('report_type').equalTo('Security Report').limitToFirst(count || 20)
+    .once('value')
+    .then((snapshot) => {
+      dispatch({
+        type: reportActions.GET_SECURITY_REPORTS_SUCCESSFUL,
+        reports: snapshot.val(),
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: reportActions.GET_SECURITY_REPORTS_FAILED,
         reports: err,
       });
     });

@@ -13,8 +13,17 @@ import toggle_actions from '../redux/actions/toggle';
 import ModalLayout from './modal.layout';
 // import SearchBar from "../shared-components/search-bar";
 export class DashboardLayout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.navigate = this.navigate.bind(this);
+  }
+
   componentDidMount() {
     window.scroll(0, 0);
+  }
+
+  navigate(url) {
+    this.props.history.push(url);
   }
 
   render() {
@@ -29,7 +38,7 @@ export class DashboardLayout extends React.Component {
             <NavbarPage canSearch={canSearch} />
             <HomeStyle>
               <div className="side-bar">
-                <div className={path === '/' ? 'fa-home menu active' : 'fa-home menu'}>
+                <div onClick={() => this.navigate('/')} className={path === '/' ? 'fa-home menu active' : 'fa-home menu'}>
                   <span className="home-icon" onClick={this.onToggleClick}>
                     <TiHomeOutline size={20} />
                   </span>
@@ -43,7 +52,7 @@ export class DashboardLayout extends React.Component {
                         }
 
                 </div>
-                <div className={path === '/facility' ? 'fa-facility menu active' : 'fa-facility menu'}>
+                <div onClick={() => this.navigate('/facility')} className={path === '/facility' ? 'fa-facility menu active' : 'fa-facility menu'}>
                   <span className="home-icon">
                     <FaTh size={20} />
                   </span>
@@ -57,7 +66,7 @@ export class DashboardLayout extends React.Component {
                         }
 
                 </div>
-                <div className={path === '/security' ? 'fa-security menu active' : 'fa-security menu'}>
+                <div onClick={() => this.navigate('/security')} className={path === '/security' ? 'fa-security menu active' : 'fa-security menu'}>
                   <span className="home-icon">
                     <FaShieldAlt size={20} />
                   </span>
@@ -70,7 +79,7 @@ export class DashboardLayout extends React.Component {
                           && <span className="home-text">Security Reports</span>
                         }
                 </div>
-                <div className={path === '/communication' ? 'fa-communication menu active' : 'fa-home menu'}>
+                <div onClick={() => this.navigate('/communication')} className={path === '/communication' ? 'fa-communication menu active' : 'fa-home menu'}>
                   <span className="home-icon">
                     <FaRegEnvelope size={20} />
                   </span>
@@ -84,7 +93,7 @@ export class DashboardLayout extends React.Component {
                         }
 
                 </div>
-                <div className={path === '/notice' ? 'fa-notice menu active' : 'fa-notice menu'}>
+                <div onClick={() => this.navigate('/notice')} className={path === '/notice' ? 'fa-notice menu active' : 'fa-notice menu'}>
                   <span className="home-icon">
                     <FaRegClone size={20} />
                   </span>
@@ -98,7 +107,7 @@ export class DashboardLayout extends React.Component {
                         }
 
                 </div>
-                <div className={path === '/students' ? 'fa-students menu active' : 'fa-students menu'}>
+                <div onClick={() => this.navigate('/students')} className={path === '/students' ? 'fa-students menu active' : 'fa-students menu'}>
                   <span className="home-icon">
                     <FaUserFriends size={20} />
                   </span>

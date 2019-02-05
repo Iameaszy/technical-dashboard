@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 // import Table from './pages/table';
-import Home from './pages/home';
+import HomePage from './pages/home';
 import Facility from './pages/facility_report';
+import Security from './pages/security_reports';
 import NotFound from './pages/errors/not-found';
 import signin from './pages/auth/signin';
 import signup from './pages/auth/signup';
@@ -21,8 +22,9 @@ const Routes = () => (
   <Router>
     <Suspense fallback={<LoadingLayout />}>
       <Switch>
-        <DashboardLayout component={Home} exact path="/" />
+        <DashboardLayout component={HomePage} exact path="/" />
         <DashboardLayout component={Facility} exact path="/facility" />
+        <DashboardLayout component={Security} exact path="/security" />
         <DefaultLayout
           component={forgotPassword}
           exact

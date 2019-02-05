@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 export const CardStyle = styled.div`
         width: 100%;
-        border: solid 1px lightgrey;
         height: 350px;
         text-align: left;
         line-height: 1;
         color: #424141;
-        padding:15px;
+        position: relative;
+        box-shadow:0 0 5px 1px lightgrey;
 
         .card-img{
                 height: 200px;
@@ -16,6 +16,7 @@ export const CardStyle = styled.div`
                 object-position: center;
         }
         .card-body{
+                padding:10px;
             .card-title{
                 font-size: 18px;
                 font-weight: 100;
@@ -28,26 +29,27 @@ export const CardStyle = styled.div`
                 line-height:1.5;
                 font-size: 15px;
                 color:#313030;
-           }
-           @media only screen and (max-width: 768px){
-                    text-align:center;
                 }
         }
 
         .card-btn{
                 border: none;
-                width:100%;
                 padding: 12px;
                 color: white;
                 background: cornflowerblue;
                 font-size: 15px;
                 border-radius: 5px;
+                position: absolute;
+                bottom: 10px;
+                left:11px;
 
                 &:hover{
                         background:#416fc1;
                 }
-
-                @media only screen and (max-width: 768px){
+                @media only screen and (min-width: 768px){
+                        width:90%;
+                }
+                @media only screen and (max-width: 767px){
                     width:50%;
                 }
            }

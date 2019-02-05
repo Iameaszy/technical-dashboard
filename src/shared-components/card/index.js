@@ -17,7 +17,7 @@ const Card = (props) => {
           {report_message.slice(0, 30)}
         </p>
       </div>
-      <button type="button" className="card-btn xs-off-3 xs-12 sm-off-0">
+      <button type="button" className="card-btn xs-12 sm-off-0">
           View
       </button>
     </CardStyle>
