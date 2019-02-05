@@ -1,9 +1,14 @@
-import * as firebase from 'firebase';
-
+import { database, initializeApp } from 'firebase/app';
 import { FirebaseConfig } from './key';
+// Add additional services that you want to use
+// require('firebase/auth');
+require('firebase/database');
+// require('firebase/firestore');
+// require('firebase/messaging');
+// require('firebase/functions');
 
-firebase.initializeApp(FirebaseConfig);
+initializeApp(FirebaseConfig);
 
-const databaseRef = firebase.database().ref();
+const databaseRef = database().ref();
 export const usersRef = databaseRef.child('Users');
 export const reportsRef = databaseRef.child('reports');
