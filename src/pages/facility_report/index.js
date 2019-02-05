@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { HomeStyle } from './home.style';
+import { FacilityStyle } from './facility.style';
 import * as reportMethods from '../../redux/action-creators/reports';
 import reportActions from '../../redux/actions/reports';
 import Card from '../../shared-components/card';
@@ -13,7 +13,7 @@ export class Home extends React.Component {
   render() {
     const { type, reports } = this.props;
     return (
-      <HomeStyle>
+      <FacilityStyle>
         <div className="header">
           <div className="title">Reports</div>
           <nav className="breadcrumb">
@@ -30,7 +30,7 @@ export class Home extends React.Component {
           ))
         }
         </div>
-      </HomeStyle>
+      </FacilityStyle>
     );
   }
 }

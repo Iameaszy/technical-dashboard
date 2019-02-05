@@ -2,12 +2,18 @@ import styled from 'styled-components';
 
 
 export const NavbarStyle = styled.div`
-background: linear-gradient(to left, #ff8e97, #8b34cc);
-padding: 20px;
-color: white;
-display:flex;
-position: relative;
-height:70px;
+    background: linear-gradient(to left,#ff8e97,#8b34cc);
+    padding: 20px;
+    color: white;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
 .right-block{
     position:absolute;
     right: 50px;
@@ -83,7 +89,7 @@ export const NavMobile = styled.div`
             padding:20px 0;
             background: white;
             color:#a2a1a1;
-            margin-top:20px;
+            margin-top:19px;
             width:290px;
             max-height:calc(100vh - 70px);
             overflow:auto;

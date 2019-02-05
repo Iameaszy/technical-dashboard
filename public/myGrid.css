@@ -265,6 +265,9 @@
   .sm-1 {
     width: 8.33%;
   }
+  .sm-off-0 {
+    margin-left: 0;
+  }
   .sm-off-half {
     margin-left: calc(8.33% / 4);
   }

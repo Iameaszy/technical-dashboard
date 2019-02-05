@@ -69,7 +69,7 @@ export class Navbar extends React.PureComponent {
           </div>
         </div>
 
-        <NavMobile className="mobile-nav-bar" style={{ right: toggled ? '-300px' : '0' }}>
+        <NavMobile className="mobile-nav-bar" style={{ right: !toggled ? '-300px' : '0' }}>
           <ul className="nav">
             <li className="nav-list message">
               <span className="icon">

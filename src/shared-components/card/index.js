@@ -1,17 +1,25 @@
 import React from 'react';
 import { CardStyle } from './card.style';
 
+
+const placeholder = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180';
 const Card = (props) => {
-  console.log(props);
+  const {
+    report_type, report_message, has_attachment, image_url, report_date, seen, thumb_image_url,
+  } = props;
+  const imgSrc = image_url || placeholder;
   return (
     <CardStyle className="card">
-      <img top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+      <img className="card-img" width="100%" src={imgSrc} alt="Card cap" />
       <div className="card-body">
-        <h4 className="card-title">{props.report_type}</h4>
+        <h4 className="card-title">{report_type}</h4>
         <p className="card-text">
-          {props.report_message}
+          {report_message.slice(0, 30)}
         </p>
       </div>
+      <button type="button" className="card-btn xs-off-3 xs-12 sm-off-0">
+          View
+      </button>
     </CardStyle>
   );
 };

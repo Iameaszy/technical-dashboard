@@ -41,12 +41,22 @@ color:white;
     line-height:6;
     background:#f1f2f7;
     color: #000;
+    margin-top:70px;
 }
 .side-bar{
     padding-top:10px;
-        color:black;
+    color:black;
     min-height: 100vh;
-    transition: 6s all;
+    margin-top: 80px;
+
+    .menu.active{
+        color:black;
+
+        [class*="icon"]{
+            padding:0 30px;
+            color:black;
+        }
+    }
     .menu{
         [class*="icon"]{
             padding:0 30px;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import {
   FaTh, FaShieldAlt, FaRegEnvelope, FaRegClone, FaUserFriends,
 } from 'react-icons/fa';
@@ -12,13 +12,13 @@ import toggle_actions from '../redux/actions/toggle';
 
 import ModalLayout from './modal.layout';
 // import SearchBar from "../shared-components/search-bar";
-export class DefaultLayout extends React.Component {
+export class DashboardLayout extends React.Component {
   componentDidMount() {
     window.scroll(0, 0);
   }
 
   render() {
-    const { component: Component, ...rest } = this.props;
+    const { component: Component, path, ...rest } = this.props;
     const { canSearch, type, status } = rest;
     return (
       <Route
@@ -29,7 +29,7 @@ export class DefaultLayout extends React.Component {
             <NavbarPage canSearch={canSearch} />
             <HomeStyle>
               <div className="side-bar">
-                <div className="fa-home menu">
+                <div className={path === '/' ? 'fa-home menu active' : 'fa-home menu'}>
                   <span className="home-icon" onClick={this.onToggleClick}>
                     <TiHomeOutline size={20} />
                   </span>
@@ -43,7 +43,7 @@ export class DefaultLayout extends React.Component {
                         }
 
                 </div>
-                <div className="fa-facility menu">
+                <div className={path === '/facility' ? 'fa-facility menu active' : 'fa-facility menu'}>
                   <span className="home-icon">
                     <FaTh size={20} />
                   </span>
@@ -57,7 +57,7 @@ export class DefaultLayout extends React.Component {
                         }
 
                 </div>
-                <div className="fa-security menu">
+                <div className={path === '/security' ? 'fa-security menu active' : 'fa-security menu'}>
                   <span className="home-icon">
                     <FaShieldAlt size={20} />
                   </span>
@@ -70,7 +70,7 @@ export class DefaultLayout extends React.Component {
                           && <span className="home-text">Security Reports</span>
                         }
                 </div>
-                <div className="fa-communication menu">
+                <div className={path === '/communication' ? 'fa-communication menu active' : 'fa-home menu'}>
                   <span className="home-icon">
                     <FaRegEnvelope size={20} />
                   </span>
@@ -84,7 +84,7 @@ export class DefaultLayout extends React.Component {
                         }
 
                 </div>
-                <div className="fa-notice menu">
+                <div className={path === '/notice' ? 'fa-notice menu active' : 'fa-notice menu'}>
                   <span className="home-icon">
                     <FaRegClone size={20} />
                   </span>
@@ -98,7 +98,7 @@ export class DefaultLayout extends React.Component {
                         }
 
                 </div>
-                <div className="fa-students menu">
+                <div className={path === '/students' ? 'fa-students menu active' : 'fa-students menu'}>
                   <span className="home-icon">
                     <FaUserFriends size={20} />
                   </span>
@@ -134,4 +134,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DefaultLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DashboardLayout));
