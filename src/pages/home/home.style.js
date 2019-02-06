@@ -29,5 +29,9 @@ export const HomeStyle = styled.div`
             .col{
                 padding:10px;
             }
+
+            @media only screen and (max-width: 767px){
+                    padding:0px;
+                }
         }
 `;
