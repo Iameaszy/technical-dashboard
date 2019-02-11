@@ -117,11 +117,13 @@ class SignInPage extends React.PureComponent {
     return <SharedStyling className="xs-12 i">
         <div className="c-w">
           <div className="c t-c">
-            <form className="xs-12 sm-6 sm-off-3" onSubmit={this.onSubmit} onClick={(e) => e.stopPropagation()}>
+            <form className="xs-12 sm-5 sm-off-4" onSubmit={this.onSubmit} onClick={(e) => e.stopPropagation()}>
               <div className="form-group">
                 <input name="name" className={`form-control ${name.valid ? '' : 'not-valid'} `} type="text" placeholder="Full name" required value={name.value} onChange={this.onChange} />
               </div>
-
+              <div className="form-group">
+                <input name="name" className={`form-control ${name.valid ? '' : 'not-valid'} `} type="text" placeholder="department" required value={name.value} onChange={this.onChange} />
+              </div>
               <div className="form-group">
                 <input name="email" className={`form-control  ${email.valid ? '' : 'not-valid'}`} type="email" placeholder="Email" required value={email.value} onChange={this.onChange} />
               </div>

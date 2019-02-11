@@ -5,6 +5,7 @@ import {
   FaPowerOff, FaBars, FaEnvelope,
   FaTh, FaShieldAlt, FaRegEnvelope, FaRegClone, FaUserFriends,
 } from 'react-icons/fa';
+import { withRouter } from 'react-router-dom';
 import { NavbarStyle, NavMobile } from './navbar.style';
 import toggle_actions from '../../redux/actions/toggle';
 
@@ -14,6 +15,7 @@ export class Navbar extends React.PureComponent {
     this.onToggleClick = this.onToggleClick.bind(this);
     this.onMobileNavClick = this.onMobileNavClick.bind(this);
     this.state = { toggled: false };
+    this.navigate = this.navigate.bind(this);
   }
 
   onToggleClick() {
@@ -28,6 +30,9 @@ export class Navbar extends React.PureComponent {
     this.setState({ toggled: !toggled });
   }
 
+  navigate(url) {
+    this.props.history.push(url);
+  }
 
   render() {
     const { type, status } = this.props;
@@ -71,49 +76,49 @@ export class Navbar extends React.PureComponent {
 
         <NavMobile className="mobile-nav-bar" style={{ right: !toggled ? '-300px' : '0' }}>
           <ul className="nav">
-            <li className="nav-list message">
+            <li onClick={() => this.navigate('/message')} className="nav-list message">
               <span className="icon">
                 <FaEnvelope />
               </span>
               <span className="text">Message</span>
             </li>
-            <li className="nav-list">
+            <li className="nav-list" onClick={() => this.navigate('/')}>
               <span className="icon">
                 <TiHomeOutline />
               </span>
               <span className="text">Dashboard</span>
             </li>
-            <li className="nav-list">
+            <li className="nav-list" onClick={() => this.navigate('/facility')}>
               <span className="icon">
                 <FaTh />
               </span>
               <span className="text">Facility Reports</span>
             </li>
-            <li className="nav-list">
+            <li className="nav-list" onClick={() => this.navigate('/security')}>
               <span className="icon">
                 <FaShieldAlt />
               </span>
               <span className="text">Security Reports</span>
             </li>
-            <li className="nav-list">
+            <li className="nav-list" onClick={() => this.navigate('/communication')}>
               <span className="icon">
                 <FaRegEnvelope />
               </span>
               <span className="text">Communications</span>
             </li>
-            <li className="nav-list">
+            <li className="nav-list" onClick={() => this.navigate('/notice')}>
               <span className="icon">
                 <FaRegClone />
               </span>
               <span className="text">Notice Board</span>
             </li>
-            <li className="nav-list">
+            <li className="nav-list" onClick={() => this.navigate('/students')}>
               <span className="icon">
                 <FaUserFriends />
               </span>
               <span className="text">Students Reports</span>
             </li>
-            <li className="nav-list">
+            <li className="nav-list" onClick={() => this.navigate('/logout')}>
               <span className="icon">
                 <FaPowerOff />
               </span>
@@ -138,4 +143,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar));

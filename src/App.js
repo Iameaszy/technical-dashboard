@@ -2,11 +2,13 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
+/* Pages */
 // import Table from './pages/table';
 import HomePage from './pages/home';
 import Facility from './pages/facility_report';
 import Security from './pages/security_reports';
 import NotFound from './pages/errors/not-found';
+import Communication from './pages/communication';
 import signin from './pages/auth/signin';
 import signup from './pages/auth/signup';
 import forgotPassword from './pages/auth/forgot-password';
@@ -25,6 +27,7 @@ const Routes = () => (
         <DashboardLayout component={HomePage} exact path="/" />
         <DashboardLayout component={Facility} exact path="/facility" />
         <DashboardLayout component={Security} exact path="/security" />
+        <DashboardLayout component={Communication} exact path="/communication" />
         <DefaultLayout
           component={forgotPassword}
           exact

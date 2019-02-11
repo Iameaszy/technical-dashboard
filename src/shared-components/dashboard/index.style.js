@@ -42,6 +42,11 @@ color:white;
     background:#f1f2f7;
     color: #000;
     margin-top:70px;
+    padding:40px;
+
+    @media only screen and (max-width: 480px){
+        padding:0;
+    }
 }
 .side-bar{
     padding-top:10px;

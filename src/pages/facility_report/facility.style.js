@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const FacilityStyle = styled.div`
-        padding:0 40px;
-        background:white-space;
+        background:white;
         .header{
             display:flex;
             padding:0;
             position:relative;
+            background:#f1f2f7;
 
             .title{
                 font-size:18px;

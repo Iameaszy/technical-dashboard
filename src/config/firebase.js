@@ -1,10 +1,10 @@
-import { database, initializeApp } from 'firebase/app';
+import { database, initializeApp, messaging } from 'firebase/app';
 import { FirebaseConfig } from './key';
 // Add additional services that you want to use
 // require('firebase/auth');
 require('firebase/database');
 // require('firebase/firestore');
-// require('firebase/messaging');
+require('firebase/messaging');
 // require('firebase/functions');
 
 initializeApp(FirebaseConfig);
@@ -12,3 +12,15 @@ initializeApp(FirebaseConfig);
 const databaseRef = database().ref();
 export const usersRef = databaseRef.child('Users');
 export const reportsRef = databaseRef.child('reports');
+export const messageRef = databaseRef.child('messages');
+export const replyRef = databaseRef.child('replies');
+export const askForPermissioToReceiveNotifications = async () => {
+  try {
+    const message = messaging();
+    await message.requestPermission();
+    const token = await message.getToken();
+    return token;
+  } catch (error) {
+    console.error(error);
+  }
+};

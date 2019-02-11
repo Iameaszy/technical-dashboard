@@ -9,7 +9,7 @@ import NavbarPage from '../shared-components/navbar';
 import Footer from '../shared-components/footer';
 import { HomeStyle } from '../shared-components/dashboard/index.style';
 import toggle_actions from '../redux/actions/toggle';
-
+import { sendNotificationToUser } from '../helpers/utils';
 import ModalLayout from './modal.layout';
 // import SearchBar from "../shared-components/search-bar";
 export class DashboardLayout extends React.Component {
@@ -20,6 +20,7 @@ export class DashboardLayout extends React.Component {
 
   componentDidMount() {
     window.scroll(0, 0);
+    sendNotificationToUser('hello');
   }
 
   navigate(url) {

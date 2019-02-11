@@ -8,7 +8,6 @@ import ModalLayout from './modal.layout';
 
 const DefaultLayout = ({ component: Component, ...rest }) => {
   window.scroll(0, 0);
-  const { canSearch } = rest;
   return (
     <Route
       {...rest}

@@ -44,6 +44,13 @@ export default (state = initState, payload) => {
         type: modal_actions.SHOW_PLEASE_LOGIN,
       };
 
+    case modal_actions.SHOW_COMPOSE_MESSAGE:
+      return {
+        show: false,
+        type: modal_actions.SHOW_COMPOSE_MESSAGE,
+        display: payload.display,
+      };
+
     default:
       return state;
   }
