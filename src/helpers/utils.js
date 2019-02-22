@@ -18,7 +18,8 @@ export const validator = (val, type) => {
 
     case 'tel':
       return !!(val && val !== '' && val.length > 5 && val.match(/^[+]?\d+$/)); // returns a boolean
-
+    case 'quill':
+      return !!(val && val !== '<p><br></p>' && val.match(/\S+/));
     default:
       return !!(val && val !== '' && val.match(/\S+/));
   }

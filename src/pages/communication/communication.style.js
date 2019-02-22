@@ -9,11 +9,13 @@ export const CommStyle = styled.div`
 `;
 
 export const CommSideStyle = styled.div`
-        width: 180px;
+    width: 180px;
     border-right: solid 1px #cdced6;
     padding: 10px;
     position:relative;
-
+    @media (max-width:400px){
+        display:none;
+    }
     .compose-btn-container{
         .compose-btn{
             line-height: 1;
@@ -50,6 +52,11 @@ export const CommSideStyle = styled.div`
 `;
 
 
-export const MainCommStyle = styled.div`
-padding:10px;
+export const MainCommStyle = styled.ul`
+    list-style: none;
+    padding-top:10px;
+    padding-right:10px;
+    height: 424px;
+    overflow-y: auto;
+    margin:0;
 `;

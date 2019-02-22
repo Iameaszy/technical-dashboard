@@ -13,6 +13,9 @@ export const ComposeStyle = styled.div`
     .text-muted{
         display:none;
     }
+    .clearfix{
+        clear:both;
+    }
     .header{
         background: #404040;
         color: white;
@@ -55,33 +58,36 @@ export const ComposeStyle = styled.div`
     .main{
         .form{
             position:relative;
-            .form-to,.form-subject{
-                padding: 0 15px;
-            }
             .form-control{
                 border: none;
                 border-bottom: solid 1px #f1ebeb;
                 line-height: 2;
+                padding:0 10px;
             }
 
             .quill{
-                .ql-editor{
-                height:226px;
-                }
-                .ql-toolbar{
-                    position: absolute;
-                    bottom: -7px;
-                    right: 0;
-                    width:86%;
-                }
+                display: flex;
+                flex-direction: column-reverse;            
             }
 
-
+            .ql-container{
+                height: 230px;
+                border-bottom: none;
+            }
+            .ql-toolbar{
+                border-bottom:0;
+                padding-left:30px;
+            }
             .send-btn{
-                padding:7px 17px;
-                position: relative;
-                right: 243px;
-                top: 4px;
+                position: absolute;
+                bottom: 1.5px;
+                left: 2px;
+                border: none;
+                padding: 10px 14px;
+                outline: none;
+                border-radius: 5px;
+                color: white;
+                background: #5656fb;
             }
         }
     }

@@ -7,7 +7,7 @@ export const FacilityStyle = styled.div`
             padding:0;
             position:relative;
             background:#f1f2f7;
-
+            line-height:3;
             .title{
                 font-size:18px;
             }

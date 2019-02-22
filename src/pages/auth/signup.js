@@ -8,7 +8,7 @@ import googleIcon from "./assets/icons/google.png";
 import { Link, withRouter } from "react-router-dom";
 import { validator } from "../../helpers/utils";
 import modal_actions from "../../redux/actions/modals";
-import { signup, social_auth } from "../../redux/action-creators/auth";
+import { signup} from "../../redux/action-creators/auth";
 import auth_actions from "../../redux/actions/auth";
 
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
@@ -29,7 +29,6 @@ const mapDispatchToProps = dispatch => {
     close_signup_modal:()=>dispatch({type:modal_actions.SHOW_NOTHING}),
     show_signin_modal: () => dispatch({ type: modal_actions.SHOW_SIGNIN }),
     signup: obj => dispatch(signup(obj)),
-    social_auth: (obj, type) => dispatch(social_auth(obj, type))
   };
 };
 
@@ -96,7 +95,7 @@ class SignInPage extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
       if (nextProps.type === auth_actions.SIGNUP_SUCCESSFUL) {
-        nextProps.history.push("/dashboard");
+        nextProps.history.push("/");
       }
     }
   }
@@ -120,9 +119,6 @@ class SignInPage extends React.PureComponent {
             <form className="xs-12 sm-5 sm-off-4" onSubmit={this.onSubmit} onClick={(e) => e.stopPropagation()}>
               <div className="form-group">
                 <input name="name" className={`form-control ${name.valid ? '' : 'not-valid'} `} type="text" placeholder="Full name" required value={name.value} onChange={this.onChange} />
-              </div>
-              <div className="form-group">
-                <input name="name" className={`form-control ${name.valid ? '' : 'not-valid'} `} type="text" placeholder="department" required value={name.value} onChange={this.onChange} />
               </div>
               <div className="form-group">
                 <input name="email" className={`form-control  ${email.valid ? '' : 'not-valid'}`} type="email" placeholder="Email" required value={email.value} onChange={this.onChange} />

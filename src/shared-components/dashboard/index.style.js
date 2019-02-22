@@ -44,7 +44,7 @@ color:white;
     margin-top:70px;
     padding:40px;
 
-    @media only screen and (max-width: 480px){
+    @media only screen and (max-width: 991px){
         padding:0;
     }
 }

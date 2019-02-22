@@ -8,7 +8,7 @@ import { validator } from "../../helpers/utils";
 import auth_actions from "../../redux/actions/auth";
 
 import Icon from "react-fa";
-import { forget_password } from "../../redux/action-creators/auth";
+import { forgetPassword } from "../../redux/action-creators/auth";
 
 class ForgotPasswordPage extends React.PureComponent {
   constructor(props) {
@@ -147,7 +147,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    forgotPassword: obj => dispatch(forget_password(obj))
+    forgotPassword: obj => dispatch(forgetPassword(obj))
   };
 };
 export default connect(
