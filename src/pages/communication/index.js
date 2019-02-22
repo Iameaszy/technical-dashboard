@@ -6,20 +6,23 @@ import {
 import { MdFileUpload } from 'react-icons/md';
 import { createGlobalStyle } from 'styled-components';
 import { CommSideStyle, CommStyle, MainCommStyle } from './communication.style';
-import { ComposeComponent } from './compose/index';
+import ComposeComponent from './compose/index';
 import modalActions from '../../redux/actions/modals';
+import * as messageActionCreators from '../../redux/action-creators/message';
+import * as NotificationComponents from '../../shared-components/notification/index';
+import messageAction from '../../redux/actions/message';
+import { List } from './list/index';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    /*overflow-y:hidden;*/
+    overflow-y:hidden;
   }
 
-  
-    @media only screen and (max-width: 600px){
-                    .gBFetE .content{
-                        padding:0 !important;
-                    }
-            }
+  @media only screen and (max-width: 600px){
+      .gBFetE .content{
+            padding:0 !important;
+          }
+      }
 `;
 
 const options = ['Inbox', 'Sent', 'Draft', 'Outbox', 'Starred', 'Trash'];
@@ -37,21 +40,70 @@ export class CommunicationComponent extends React.Component {
   constructor(props) {
     super(props);
     this.onMailOptionClick = this.onMailOptionClick.bind(this);
-    this.state = { mailActiveOptions: 0 };
+    this.state = {
+      mailActiveOptions: 0,
+      notification: {
+        status: false, message: '', type: 'Notification2',
+      },
+      messages: {},
+    };
+    this.timeout = null;
   }
+
+  componentDidMount() {
+    const { auth } = this.props;
+    this.props.fetchMessages(auth.data);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.message.type !== this.props.message.type && nextProps.message.type === messageAction.SEND_MESSAGE_SUCCESSFUL) {
+      this.setState({
+        notification: {
+          type: 'Notification2',
+          status: true,
+          message: 'Message Sent',
+        },
+      });
+
+      this.timeout = setTimeout(() => {
+        this.setState({
+          notification: {
+            type: 'Notification2',
+            status: false,
+            message: '',
+          },
+        });
+      }, 2000);
+    }
+
+    if (nextProps.message.type === messageAction.GET_MESSAGES_SUCCESSFUL) {
+      this.setState(() => ({ messages: nextProps.message.messages || {} }));
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
 
   onMailOptionClick(ind) {
     this.setState({ mailActiveOptions: ind });
   }
 
   render() {
-    const { mailActiveOptions } = this.state;
+    const { mailActiveOptions, notification } = this.state;
+    const { type: notificationType, message: notificationMessage, status } = notification;
+    const Notification = NotificationComponents[notificationType];
     const {
-      type, compose, show, closeCompose,
+      type, compose, show, closeCompose, message, auth, sendMessage,
     } = this.props;
+    const { messages } = this.state;
     return (
       <React.Fragment>
         <GlobalStyle />
+        <Notification status={status}>
+          {notificationMessage}
+        </Notification>
         <CommStyle>
           <CommSideStyle className="comm-sidebar">
             <div className="compose-btn-container">
@@ -76,11 +128,12 @@ export class CommunicationComponent extends React.Component {
             </ul>
           </CommSideStyle>
           <MainCommStyle className="xs-12">
-                    main
+            {Object.keys(messages).map((val, ind) => <List key={ind} {...messages[val]} />)
+              }
           </MainCommStyle>
           {
             type === modalActions.SHOW_COMPOSE_MESSAGE && show
-            && <ComposeComponent close={closeCompose} />
+            && <ComposeComponent sendMessage={sendMessage} message={message} auth={auth} close={closeCompose} />
           }
         </CommStyle>
       </React.Fragment>
@@ -90,6 +143,8 @@ export class CommunicationComponent extends React.Component {
 const mapStateToProps = states => ({
   type: states.modal.type,
   show: states.modal.display,
+  message: states.message,
+  auth: states.auth,
 });
 const mapDispatchToProps = dispatch => ({
   compose: () => {
@@ -98,6 +153,11 @@ const mapDispatchToProps = dispatch => ({
   closeCompose: () => {
     dispatch({ type: modalActions.SHOW_COMPOSE_MESSAGE, display: false });
   },
+  clearMessageAction: () => {
+    dispatch({ type: modalActions.SHOW_COMPOSE_MESSAGE, display: false });
+  },
+  sendMessage: obj => dispatch(messageActionCreators.sendMessage(obj)),
+  fetchMessages: (obj) => { dispatch(messageActionCreators.fetchMessages(obj)); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommunicationComponent);

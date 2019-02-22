@@ -8,6 +8,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { NavbarStyle, NavMobile } from './navbar.style';
 import toggle_actions from '../../redux/actions/toggle';
+import { signout } from '../../redux/action-creators/auth';
 
 export class Navbar extends React.PureComponent {
   constructor(props) {
@@ -35,7 +36,7 @@ export class Navbar extends React.PureComponent {
   }
 
   render() {
-    const { type, status } = this.props;
+    const { type, status, logout } = this.props;
     const { toggled } = this.state;
     return (
       <NavbarStyle>
@@ -66,7 +67,14 @@ export class Navbar extends React.PureComponent {
         <div className="right-block">
           <div className="message"><FaEnvelope /></div>
           <div className="logout">
-            <span className="logout-text">Logout</span>
+            <span
+              onClick={() => {
+                logout();
+              }}
+              className="logout-text"
+            >
+            Logout
+            </span>
             <span className="power-off-icon"><FaPowerOff /></span>
           </div>
           <div className="mobile-toggle">
@@ -122,7 +130,14 @@ export class Navbar extends React.PureComponent {
               <span className="icon">
                 <FaPowerOff />
               </span>
-              <span className="text">Logout</span>
+              <span
+                onClick={() => {
+                  logout();
+                }}
+                className="text"
+              >
+                  Logout
+              </span>
             </li>
           </ul>
         </NavMobile>
@@ -140,6 +155,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggled: (show) => {
     dispatch({ type: toggle_actions.TOGGLE, show });
+  },
+  logout: () => {
+    signout();
   },
 });
 

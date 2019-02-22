@@ -4,7 +4,7 @@ import SharedStyling from './styles/shared';
 
 import { withRouter } from 'react-router-dom';
 import { validator } from '../../helpers/utils';
-import { reset_password } from '../../redux/action-creators/auth';
+import { resetPassword } from '../../redux/action-creators/auth';
 import auth_actions from '../../redux/actions/auth';
 
 import { getQueryString } from '../../helpers/utils';
@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    resetPassword: (obj, qs) => dispatch(reset_password(obj, qs)),
+    resetPassword: (obj, qs) => dispatch(resetPassword(obj, qs)),
   };
 };
 

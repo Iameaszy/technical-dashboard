@@ -15,6 +15,7 @@ import forgotPassword from './pages/auth/forgot-password';
 import passwordReset from './pages/auth/password-reset';
 import VerifyEmail from './pages/auth/verify_email';
 import DefaultLayout from './layouts/default.layout';
+// import requireAuth from './authentication';
 // import ProtectedLayout from './layouts/protected.layout';
 // import HomeLayout from './layouts/home.layout';
 import LoadingLayout from './layouts/loading.layout';

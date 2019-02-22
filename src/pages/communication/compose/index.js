@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { connect } from 'react-redux';
+import Icon from 'react-fa';
+import { withRouter } from 'react-router-dom';
 import { ComposeStyle } from './compose.style';
 import { validator } from '../../../helpers/utils';
 import 'react-quill/dist/quill.snow.css'; // ES6
-import Icon from 'react-fa';
 import messageAction from '../../../redux/actions/message';
 
 export class ComposeComponent extends React.Component {
@@ -20,6 +20,7 @@ export class ComposeComponent extends React.Component {
     };
     this.handleQuilChange = this.handleQuilChange.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onInputChange(e) {
@@ -36,27 +37,38 @@ export class ComposeComponent extends React.Component {
     }));
   }
 
+  onSubmit() {
+    const { auth, sendMessage } = this.props;
+    const { toSubmit } = this.state;
+    const newObj = { ...toSubmit, uid: auth.data.uid, from: auth.data.email };
+    if (auth.isAuthenticated) {
+      sendMessage(newObj);
+    } else {
+      this.props.history.push('/signin');
+    }
+  }
+
   handleQuilChange(value) {
     this.setState(p => ({
       toSubmit: { ...p.toSubmit, message: value },
       form: {
         ...p.form,
-        message: { value, valid: validator(value, 'input') },
+        message: { value, valid: validator(value, 'quill') },
       },
     }));
   }
 
 
   render() {
-    const { close } = this.props;
+    const { close, message: messageProps } = this.props;
+    console.log('aa:', this.props);
     const { form } = this.state;
     const { to, subject, message } = form;
     const formKeys = Object.keys(form);
     const validCount = formKeys.filter(k => form[k].valid === true).length;
     const allFieldsAreValid = validCount === formKeys.length;
-
     return (
-      <ComposeStyle className="xs-5">
+      <ComposeStyle className="xs-5 sm-6">
         <header className="header">
           <p className="title">New Message</p>
           <div className="compose-controls">
@@ -64,7 +76,13 @@ export class ComposeComponent extends React.Component {
           </div>
         </header>
         <main className="main">
-          <form className="form">
+          <form
+            className="form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              this.onSubmit();
+            }}
+          >
             <div className="form-group xs-12 form-to">
               <input
                 value={to.value}
@@ -90,15 +108,24 @@ export class ComposeComponent extends React.Component {
                 onChange={this.handleQuilChange}
               />
             </div>
-
-
-            <button
-              type="submit"
-              disabled={allFieldsAreValid !== true}
-              className="send-btn"
-            >
-                Send
-            </button>
+            <div className="clearfix" />
+            {(messageProps.type === messageAction.SEND_MESSAGE_REQUEST || messageProps.type === messageAction.GET_MESSAGES_REQUEST) ? (
+              <button
+                type="submit"
+                className="send-btn"
+                disabled={allFieldsAreValid !== true}
+              >
+                <Icon name="spinner" spin />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="send-btn"
+                disabled={allFieldsAreValid !== true}
+              >
+                    Send
+              </button>
+            )}
           </form>
         </main>
       </ComposeStyle>
@@ -106,9 +133,4 @@ export class ComposeComponent extends React.Component {
   }
 }
 
-const mapStateToProps = states => ({
-  type: states.message.type,
-});
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ComposeComponent);
+export default withRouter(ComposeComponent);

@@ -1,81 +1,79 @@
-import axios from 'axios';
-import endpoints from '../../endpoints';
-import fishes from '../actions/fish';
-import { extractMessage } from '../../helpers/utils';
+import messageActions from '../actions/message';
+import modalActions from '../actions/modals';
+import { messageRef } from '../../config/firebase';
 
-export const fetchFishes = () => (dispatch) => {
+export const fetchMessages = obj => async (dispatch) => {
   dispatch({
-    type: fishes.GET_FISHES_REQUEST,
+    type: messageActions.GET_MESSAGES_REQUEST,
   });
-  axios({
-    url: endpoints.GET_FISHES,
-    method: 'GET',
-    data: {
-      relevant: true,
-      recent: true,
-    },
-  })
-    .then(({ data }) => {
-      dispatch({
-        type: fishes.GET_FISHES_SUCCESSFUL,
-        fishes: data,
-      });
-    })
-    .catch((res) => {
-      dispatch({
-        type: fishes.GET_FISHES_FAILED,
-        message: extractMessage(res),
-      });
+  // try {
+  /* const messages = await messageRef.orderByChild('to').equalTo(obj.email).limitToFirst(20).once('value'); */
+  await messageRef.orderByChild('to').equalTo(obj.email).limitToFirst(20).on('value', (dataSnapshot) => {
+    dispatch({
+      type: messageActions.GET_MESSAGES_SUCCESSFUL,
+      messages: dataSnapshot.val(),
     });
+  }, (error) => {
+    dispatch({
+      type: messageActions.GET_MESSAGES_FAILED,
+      messages: error.message,
+    });
+  });
+  /* } catch (err) {
+    dispatch({
+      type: messageActions.GET_MESSAGES_FAILED,
+      messages: err.message,
+    });
+  } */
+};
+
+export const fetchMessage = id => async (dispatch) => {
+  dispatch({
+    type: messageActions.GET_MESSAGE_REQUEST,
+  });
+  messageRef.child(id).on('value', (dataSnapshot) => {
+    dispatch({
+      type: messageActions.GET_MESSAGE_SUCCESSFUL,
+      message: dataSnapshot.val(),
+    });
+  }, (err) => {
+    dispatch({
+      type: messageActions.GET_MESSAGES_FAILED,
+      message: err.message,
+    });
+  });
 };
 
 
-export const fetchFish = id => (dispatch) => {
+export const sendMessage = obj => async (dispatch) => {
   dispatch({
-    type: fishes.GET_FISH_REQUEST,
+    type: messageActions.SEND_MESSAGE_REQUEST,
   });
-  axios({
-    url: `${endpoints.GET_FISHES}/${id}`,
-    method: 'GET',
-    data: {
-      relevant: true,
-      recent: true,
-    },
-  })
-    .then(({ data }) => {
-      dispatch({
-        type: fishes.GET_FISH_SUCCESSFUL,
-        fishes: data,
-      });
-    })
-    .catch((res) => {
-      dispatch({
-        type: fishes.GET_FISH_FAILED,
-        message: extractMessage(res),
-      });
+  const newObj = { ...obj };
+  newObj.viewed = false;
+  newObj.important = false;
+  newObj.date = Date.now();
+  try {
+    newObj.sent = true;
+    await messageRef.push().set(newObj);
+    dispatch({
+      type: modalActions.SHOW_COMPOSE_MESSAGE,
+      display: false,
     });
-};
 
-
-export const addFish = obj => (dispatch) => {
-  dispatch({
-    type: fishes.ADD_FISH_REQUEST,
-  });
-  axios({
-    url: `${endpoints.GET_FISHES}`,
-    method: 'POST',
-    data: JSON.stringify(obj),
-  })
-    .then(({ data }) => {
-      dispatch({
-        type: fishes.ADD_FISH_SUCCESSFUL,
-        fishes: data.fishes,
-      });
-    })
-    .catch((res) => {
-      dispatch({
-        type: fishes.ADD_FISH_FAILED,
-        message: extractMessage(res),
-      });
+    dispatch({
+      type: messageActions.SEND_MESSAGE_SUCCESSFUL,
     });
+  } catch (err) {
+    newObj.outbox = true;
+    await messageRef.push().set(newObj);
+    dispatch({
+      type: modalActions.SHOW_COMPOSE_MESSAGE,
+      display: false,
+    });
+    dispatch({
+      type: messageActions.SEND_MESSAGE_FAILED,
+      message: err.message,
+    });
+  }
 };

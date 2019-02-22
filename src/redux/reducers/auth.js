@@ -15,6 +15,26 @@ const initState = {
 
 export default (state = initState, payload) => {
   switch (payload.type) {
+    case auth_actions.FETCH_USER_REQUEST:
+      return {
+        ...state,
+        type: auth_actions.FETCH_USER_REQUEST,
+        isAuthenticated: false,
+      };
+    case auth_actions.FECTH_USER_FAILED:
+      return {
+        ...state,
+        isAuthenticated: false,
+        type: auth_actions.FECTH_USER_FAILED,
+      };
+    case auth_actions.FETCH_USER_SUCCESSFUL:
+      return {
+        ...state,
+        type: auth_actions.FETCH_USER_SUCCESSFUL,
+        data: payload.user,
+        isAuthenticated: true,
+      };
+
     case auth_actions.SIGNIN_REQUEST:
       return {
         ...state,
@@ -93,12 +113,11 @@ export default (state = initState, payload) => {
         message: payload.message,
         data: { ...state.data, ...payload.data },
       };
-
     case auth_actions.FORGOT_PASSWORD_FAILED:
       return {
         ...state,
         type: auth_actions.FORGOT_PASSWORD_FAILED,
-        message: payload.message,
+        data: payload.user,
       };
 
     case auth_actions.PASSWORD_RESET_REQUEST:

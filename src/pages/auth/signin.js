@@ -13,7 +13,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import auth_actions from '../../redux/actions/auth';
 
 import Icon from 'react-fa';
-import { signin, social_auth } from '../../redux/action-creators/auth';
+import { signin } from '../../redux/action-creators/auth';
 
 import { GoogleLogin } from 'react-google-login';
 
@@ -29,7 +29,6 @@ const mapDispatchToProps = (dispatch) => {
     show_signup_modal: () => dispatch({ type: modal_actions.SHOW_SIGNUP }),
     close_signup_modal: () => dispatch({ type: modal_actions.SHOW_NOTHING }),
     signin: (obj) => dispatch(signin(obj)),
-    social_auth: (obj, type) => dispatch(social_auth(obj, type)),
   };
 };
 class SignInPage extends React.PureComponent {
@@ -68,6 +67,13 @@ class SignInPage extends React.PureComponent {
     });
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props !== nextProps) {
+      if (nextProps.type === auth_actions.SIGNIN_SUCCESSFUL) {
+        nextProps.history.push("/");
+      }
+    }
+  }
   onSubmit = (e) => {
     e.preventDefault();
     this.props.signin(this.state.toSubmit);
@@ -146,7 +152,7 @@ class SignInPage extends React.PureComponent {
               
               <div className="xs-16 sm-6">
               <div className="form-group-checkbox l">
-              <label className="remember-label" for="remember">Keep me signed in </label>
+              <label className="remember-label" htmlFor="remember">Keep me signed in </label>
               <input
                   className="form-control-checkbox"
                   name="remember"
@@ -240,7 +246,7 @@ class SignInPage extends React.PureComponent {
                   </p>
 
                   <Link
-                    to="#"
+                    to="/signup"
                     className="big pad"
                     onClick={this.props.show_signup_modal}>
                     Create an account

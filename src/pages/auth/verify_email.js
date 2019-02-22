@@ -5,13 +5,14 @@ import { withRouter } from 'react-router-dom';
 
 import auth_actions from '../../redux/actions/auth';
 import { getQueryString } from '../../helpers/utils';
-import { verify_email } from '../../redux/action-creators/auth';
+import { verifyEmail } from '../../redux/action-creators/auth';
 
 class VerifyEmailPage extends React.PureComponent {
   componentDidMount() {
-    let qs = getQueryString(window.location.href);
+    const qs = getQueryString(window.location.href);
     this.props.verifyEmail(qs);
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.type === auth_actions.VERIFY_EMAIL_SUCCESSFUL) {
       return this.props.history.push('/', {
@@ -26,23 +27,20 @@ class VerifyEmailPage extends React.PureComponent {
       });
     }
   }
+
   render() {
     return <div />;
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    type: state.auth.type,
-    message: state.auth.message,
-  };
-};
+const mapStateToProps = state => ({
+  type: state.auth.type,
+  message: state.auth.message,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    verifyEmail: (query) => dispatch(verify_email(query)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  verifyEmail: query => dispatch(verifyEmail(query)),
+});
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
