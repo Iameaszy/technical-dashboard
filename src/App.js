@@ -9,6 +9,7 @@ import Facility from './pages/facility_report';
 import Security from './pages/security_reports';
 import NotFound from './pages/errors/not-found';
 import Communication from './pages/communication';
+import NoticePage from './pages/notice';
 import signin from './pages/auth/signin';
 import signup from './pages/auth/signup';
 import forgotPassword from './pages/auth/forgot-password';
@@ -29,6 +30,7 @@ const Routes = () => (
         <DashboardLayout component={Facility} exact path="/facility" />
         <DashboardLayout component={Security} exact path="/security" />
         <DashboardLayout component={Communication} exact path="/communication" />
+        <DashboardLayout component={NoticePage} exact path="/notice" />
         <DefaultLayout
           component={forgotPassword}
           exact
