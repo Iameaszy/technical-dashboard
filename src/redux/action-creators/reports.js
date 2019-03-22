@@ -77,6 +77,25 @@ export const fetchReports = count => async (dispatch) => {
     });
 };
 
+export const fetchReport = id => async (dispatch) => {
+  dispatch({
+    type: reportActions.GET_REPORT_REQUEST,
+  });
+  reportsRef.child('tkMCkiWomNV5O8vQcHELn2K9pKR2').child(id).once('value')
+    .then((snapshot) => {
+      dispatch({
+        type: reportActions.GET_REPORT_SUCCESSFUL,
+        report: snapshot.val(),
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: reportActions.GET_REPORT_FAILED,
+        report: err,
+      });
+    });
+};
+
 export const fetchFacilityReports = count => async (dispatch) => {
   dispatch({
     type: reportActions.GET_FACILITY_REPORTS_REQUEST,
@@ -96,7 +115,6 @@ export const fetchFacilityReports = count => async (dispatch) => {
       });
     });
 };
-
 
 export const fetchSecurityReports = count => async (dispatch) => {
   dispatch({

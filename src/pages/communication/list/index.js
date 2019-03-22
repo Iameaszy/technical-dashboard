@@ -6,7 +6,8 @@ const months = ['Jan', 'Feb', 'March', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep
 export const List = (props) => {
   const {
     uid, subject, message, from,
-    date,
+    date, onStarChecked, onMessageChecked, id, checked,
+    important,
   } = props;
 
   const myDate = new Date(date || null);
@@ -14,8 +15,25 @@ export const List = (props) => {
     <ListStyle dataMsgID={uid}>
       <div className="controls">
         <div className="group">
-          <input className="message-select" id="" type="checkbox" value="clicked" />
-          <FaRegStar className="star" />
+          <input
+            checked={checked}
+            onChange={() => {
+              onMessageChecked(id);
+            }}
+            className="message-select"
+            id=""
+            type="checkbox"
+            value="clicked"
+          />
+
+          <FaRegStar
+            onClick={() => {
+              onStarChecked(id);
+            }}
+            style={{ color: important ? 'black' : '#a2a1a1' }}
+            className="star"
+          />
+
           <div className="from">
             {from}
           </div>

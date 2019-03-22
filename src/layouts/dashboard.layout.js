@@ -5,15 +5,40 @@ import {
 } from 'react-icons/fa';
 import { TiHomeOutline } from 'react-icons/ti';
 import { connect } from 'react-redux';
+import styled, { keyframes } from 'styled-components';
 import NavbarPage from '../shared-components/navbar';
 import Footer from '../shared-components/footer';
 import { HomeStyle } from '../shared-components/dashboard/index.style';
 import toggle_actions from '../redux/actions/toggle';
-// import { sendNotificationToUser } from '../helpers/utils';
 import ModalLayout from './modal.layout';
 import { fetchUser } from '../redux/action-creators/auth';
 import auth_actions from '../redux/actions/auth';
-// import SearchBar from "../shared-components/search-bar";
+import Logo from '../assets/logo.jpg';
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+const Div = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin: auto;
+    height: 100vh;
+
+    img{
+      width:200px;
+      height:200px;
+      display:block;
+      border-radius:100%;
+      animation: ${rotate} 2s linear infinite;
+    }
+`;
 export class DashboardLayout extends React.Component {
   constructor(props) {
     super(props);
@@ -51,7 +76,7 @@ export class DashboardLayout extends React.Component {
     }
 
     if (fetchUserType === auth_actions.FETCH_USER_REQUEST) {
-      return <p>Loading</p>;
+      return <Div><img src={Logo} alt="Website Loader" /></Div>;
     }
 
     if (fetchUserType === auth_actions.FETCH_USER_SUCCESSFUL) {
@@ -130,20 +155,6 @@ export class DashboardLayout extends React.Component {
                     {
                             type === toggle_actions.TOGGLE && status === false
                             && <span className="home-text">Notice Board</span>
-                          }
-
-                  </div>
-                  <div onClick={() => this.navigate('/students')} className={path === '/students' ? 'fa-students menu active' : 'fa-students menu'}>
-                    <span className="home-icon">
-                      <FaUserFriends size={20} />
-                    </span>
-                    {
-                            type === toggle_actions.TOGGLE && status === true
-                            && <span className="home-text" style={{ display: 'none' }}>Student Reports</span>
-                          }
-                    {
-                            type === toggle_actions.TOGGLE && status === false
-                            && <span className="home-text">Student Reports</span>
                           }
 
                   </div>

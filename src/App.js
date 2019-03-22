@@ -21,6 +21,7 @@ import DefaultLayout from './layouts/default.layout';
 // import HomeLayout from './layouts/home.layout';
 import LoadingLayout from './layouts/loading.layout';
 import DashboardLayout from './layouts/dashboard.layout';
+import SingleCardComponent from './pages/home/single-card/single';
 
 const Routes = () => (
   <Router>
@@ -46,6 +47,7 @@ const Routes = () => (
         <DefaultLayout component={VerifyEmail} path="/user/verify/email" />
         <Route component={signin} exact path="/signin" />
         <Route component={signup} exact path="/signup" />
+        <DashboardLayout component={SingleCardComponent} exact path="/card" />
         <DefaultLayout component={NotFound} />
       </Switch>
     </Suspense>

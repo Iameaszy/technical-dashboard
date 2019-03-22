@@ -2,6 +2,7 @@ import reportActions from '../actions/reports';
 
 const init = {
   action: '',
+  report: {},
   reports: {},
 };
 export default (state = init, payload) => {
@@ -23,6 +24,26 @@ export default (state = init, payload) => {
         ...state,
         action: reportActions.GET_REPORTS_SUCCESSFUL,
         reports: payload.reports,
+      };
+
+      // Report
+    case reportActions.GET_REPORT_REQUEST:
+      return {
+        ...state,
+        type: reportActions.GET_REPORT_REQUEST,
+      };
+
+    case reportActions.GET_REPORT_FAILED:
+      return {
+        ...state,
+        type: reportActions.GET_REPORT_FAILED,
+        report: payload.report,
+      };
+    case reportActions.GET_REPORT_SUCCESSFUL:
+      return {
+        ...state,
+        type: reportActions.GET_REPORT_SUCCESSFUL,
+        report: payload.report,
       };
 
     case reportActions.GET_FACILITY_REPORTS_REQUEST:

@@ -61,14 +61,13 @@ export class ComposeComponent extends React.Component {
 
   render() {
     const { close, message: messageProps } = this.props;
-    console.log('aa:', this.props);
     const { form } = this.state;
     const { to, subject, message } = form;
     const formKeys = Object.keys(form);
     const validCount = formKeys.filter(k => form[k].valid === true).length;
     const allFieldsAreValid = validCount === formKeys.length;
     return (
-      <ComposeStyle className="xs-5 sm-6">
+      <ComposeStyle className="xs-7 sm-6">
         <header className="header">
           <p className="title">New Message</p>
           <div className="compose-controls">

@@ -13,8 +13,15 @@ export const CommSideStyle = styled.div`
     border-right: solid 1px #cdced6;
     padding: 10px;
     position:relative;
-    @media (max-width:400px){
-        display:none;
+    transition:1s all;
+    @media (max-width:656px){
+        width:140px;
+        position: fixed;
+        border-radius: 0 40px;
+        background: white;
+        left: ${props => (props.toggled ? 0 : '-180px')};
+        z-index: 1000;
+        box-shadow: 0 0 7px 1px lightgrey;
     }
     .compose-btn-container{
         .compose-btn{

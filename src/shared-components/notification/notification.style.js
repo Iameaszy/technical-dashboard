@@ -24,7 +24,7 @@ export const Notification1Style = styled.div`
         z-index:${props => (props.status === true ? 1000 : 0)};
         left: 50%;
         transform: translate(-50%, 0);
-        background:${props => (props.type === 'alert' ? 'red' : '#11a051')};
+        background:${props => (props.notType === 'alert' ? 'red' : props.notType === 'notification' ? '#a5a538' : '#11a051')};
         color:${props => (props.color ? props.color : 'white')};
         ${props => props.status && css`
             animation-name: ${showNotification};
@@ -54,7 +54,7 @@ export const Notification2Style = styled.div`
         z-index:0;
         left: 50%;
         transform: translate(-50%, 0);
-        background:${props => (props.type === 'alert' ? 'red' : '#11a051')};
+        background:${props => (props.notType === 'alert' ? 'red' : props.notType === 'notification' ? '#a5a538' : '#11a051')};
         color:${props => (props.color ? props.color : 'white')};
         ${props => props.status && css`
             animation-name: ${showNotification};

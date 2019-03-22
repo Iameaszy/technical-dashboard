@@ -120,12 +120,6 @@ export class Navbar extends React.PureComponent {
               </span>
               <span className="text">Notice Board</span>
             </li>
-            <li className="nav-list" onClick={() => this.navigate('/students')}>
-              <span className="icon">
-                <FaUserFriends />
-              </span>
-              <span className="text">Students Reports</span>
-            </li>
             <li className="nav-list" onClick={() => this.navigate('/logout')}>
               <span className="icon">
                 <FaPowerOff />

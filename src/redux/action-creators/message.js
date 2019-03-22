@@ -6,8 +6,6 @@ export const fetchMessages = obj => async (dispatch) => {
   dispatch({
     type: messageActions.GET_MESSAGES_REQUEST,
   });
-  // try {
-  /* const messages = await messageRef.orderByChild('to').equalTo(obj.email).limitToFirst(20).once('value'); */
   await messageRef.orderByChild('to').equalTo(obj.email).limitToFirst(20).on('value', (dataSnapshot) => {
     dispatch({
       type: messageActions.GET_MESSAGES_SUCCESSFUL,
@@ -19,12 +17,6 @@ export const fetchMessages = obj => async (dispatch) => {
       messages: error.message,
     });
   });
-  /* } catch (err) {
-    dispatch({
-      type: messageActions.GET_MESSAGES_FAILED,
-      messages: err.message,
-    });
-  } */
 };
 
 export const fetchMessage = id => async (dispatch) => {
@@ -76,4 +68,57 @@ export const sendMessage = obj => async (dispatch) => {
       message: err.message,
     });
   }
+};
+
+export const fetchSentMessages = count => async (dispatch) => {
+  dispatch({
+    type: messageActions.GET_MESSAGES_REQUEST,
+  });
+  await messageRef.orderByChild('sent').equalTo(true).limitToFirst(count || 20).on('value', (dataSnapshot) => {
+    dispatch({
+      type: messageActions.GET_MESSAGES_SUCCESSFUL,
+      messages: dataSnapshot.val(),
+    });
+  }, (error) => {
+    dispatch({
+      type: messageActions.GET_MESSAGES_FAILED,
+      messages: error.message,
+    });
+  });
+};
+
+
+export const fetchStarredMessages = count => async (dispatch) => {
+  dispatch({
+    type: messageActions.GET_MESSAGES_REQUEST,
+  });
+  await messageRef.orderByChild('important').equalTo(true).limitToFirst(count || 20).on('value', (dataSnapshot) => {
+    dispatch({
+      type: messageActions.GET_MESSAGES_SUCCESSFUL,
+      messages: dataSnapshot.val(),
+    });
+  }, (error) => {
+    dispatch({
+      type: messageActions.GET_MESSAGES_FAILED,
+      messages: error.message,
+    });
+  });
+};
+
+
+export const starMessage = (id, star) => (dispatch) => {
+  dispatch({
+    type: messageActions.STAR_MESSAGE_REQUEST,
+  });
+  messageRef.child(id).update({ important: !!star }).then(() => {
+    dispatch({
+      type: messageActions.STAR_MESSAGE_SUCCESSFUL,
+    });
+  })
+    .catch((error) => {
+      dispatch({
+        type: messageActions.GET_MESSAGES_FAILED,
+        messages: error.message,
+      });
+    });
 };

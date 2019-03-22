@@ -21,11 +21,15 @@ export const SecurityStyle = styled.div`
 
         .home-content{
             background:white;
-            padding:40px;
+            padding:20px;
             width:100%;
 
             .col{
                 padding:10px;
             }
+
+            @media only screen and (max-width: 767px){
+                    padding:0px;
+                }
         }
 `;

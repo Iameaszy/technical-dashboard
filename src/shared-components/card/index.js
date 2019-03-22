@@ -1,23 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CardStyle } from './card.style';
 
+const placeholder = 'https://via.placeholder.com/300?text=No+Image';
 
-const placeholder = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180';
 const Card = (props) => {
   const { report_type, ...rest } = props;
   const imgSrc = rest.image_url || placeholder;
   return (
     <CardStyle className="card">
-      <img className="card-img" width="100%" src={imgSrc} alt="Card cap" />
-      <div className="card-body">
-        <h4 className="card-title">{report_type}</h4>
-        <p className="card-text">
-          {rest.report_message.slice(0, 30)}
-        </p>
+      <div className="text-img-wrapper">
+        <div className="img-wrapper">
+          <span className="report-type">{report_type}</span>
+          <img className="card-img" width="100%" src={imgSrc} alt="Card cap" />
+        </div>
       </div>
-      <button type="button" className="card-btn xs-12 sm-off-0">
-          View
-      </button>
+      <p className="card-text">
+        {rest.report_message.slice(0, 30)}
+      </p>
+      <Link to={`/card?id=${rest.id}`} className="card-btn xs-12 sm-off-0"> View </Link>
     </CardStyle>
   );
 };

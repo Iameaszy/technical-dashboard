@@ -24,7 +24,7 @@ export const HomeStyle = styled.div`
 
         .home-content{
             background:white;
-            padding:40px;
+            padding:20px;
             width:100%;
 
             .col{
