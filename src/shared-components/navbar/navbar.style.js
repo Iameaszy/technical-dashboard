@@ -14,6 +14,12 @@ export const NavbarStyle = styled.div`
     width: 100%;
     height: 70px;
     z-index: 1000;
+.logo{
+    margin-top:15px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
 .right-block{
     position:absolute;
     right: 50px;
@@ -71,12 +77,13 @@ export const NavbarStyle = styled.div`
         margin-right:10px;
         line-height:0.5;
         cursor:pointer;
-    }
-
-    @media only screen and (max-width: 991px){
+        @media only screen and (max-width: 991px){
         display:none;
+        }
     }
-
+    @media only screen and (max-width: 991px){
+        margin-left:30px !important;
+    }
 }
 `;
 export const NavMobile = styled.div`

@@ -99,7 +99,7 @@ export class DashboardLayout extends React.Component {
                           }
                     {
                             type === toggle_actions.TOGGLE && status === false
-                            && <span className="home-text">Dashboard</span>
+                            && <div className="home-text">Dashboard</div>
                           }
 
                   </div>

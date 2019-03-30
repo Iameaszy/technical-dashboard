@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const ComposeStyle = styled.div`
     position:fixed;
-    right:40px;
+    top:90px;
+    left:28%;
     height:372px;
     border-radius: 5px;
     line-height:1.2;

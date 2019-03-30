@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { NavbarStyle, NavMobile } from './navbar.style';
 import toggle_actions from '../../redux/actions/toggle';
 import { signout } from '../../redux/action-creators/auth';
+import Logo from '../../assets/logo.jpg';
 
 export class Navbar extends React.PureComponent {
   constructor(props) {
@@ -47,7 +48,7 @@ export class Navbar extends React.PureComponent {
 
             <span className="bars-icon" onClick={this.onToggleClick}><FaBars /></span>
 
-            <span>Dashboard</span>
+            <div><img className="logo" src={Logo} alt="Logo" /></div>
           </p>
           )
         }
@@ -59,7 +60,7 @@ export class Navbar extends React.PureComponent {
 
             <span className="bars-icon" onClick={this.onToggleClick}><FaBars /></span>
 
-            <span>Dashboard</span>
+            <div><img className="logo" src={Logo} alt="Logo" /></div>
           </p>
           )
         }

@@ -195,13 +195,20 @@ export class CommunicationComponent extends React.Component {
 
   handleOptionsClick(ind) {
     const { auth } = this.props;
-    this.setState({ controlClicked: true });
     switch (ind) {
-      case 0: this.props.fetchMessages(auth.data); break;
-      case 1: this.props.fetchSentMessages(); break;
-      case 2: this.props.fetchDrafts(); break;
-      case 3: this.props.fetchStarredMessages(); break;
-      default: this.props.fetchTrash();
+      case 0: return this.setState({ controlClicked: true }, () => {
+        this.props.fetchMessages(auth.data);
+      });
+      case 1: return this.setState({ controlClicked: true }, () => {
+        this.props.fetchSentMessages();
+      });
+      case 2: return this.setState({ controlClicked: true }, () => {
+        this.props.fetchDrafts();
+      });
+      case 3: return this.setState({ controlClicked: true }, () => {
+        this.props.fetchStarredMessages();
+      });
+      default: return null;
     }
   }
 
