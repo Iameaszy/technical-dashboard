@@ -7,13 +7,13 @@ export const CardStyle = styled.div`
         text-align: left;
         line-height: 1;
         color: #424141;
-        position: relative;
-        box-shadow:0 0 5px 1px lightgrey;
+        border:1px solid lightgrey;
         position:relative;
-
+        border-radius:10px;
         
         .text-img-wrapper{
                 position:absolute;
+                width:100%;
 
                 @media only screen and (max-width: 576px){
                         width: 100%;
@@ -26,23 +26,32 @@ export const CardStyle = styled.div`
                         .report-type{
                                 position: absolute;
                                 line-height: 1.2;
-                                font-weight: bold;
+                                /* font-weight: bold; */
                                 top: 0;
                                 padding: 5px;
                                 color: white;
-                                background: #79799a;
+                                background: #CD67AE;
+                                border-radius:10px 0  0 0;
                         }
                 }
                 .card-img{
                         height: 200px;
                         object-fit: cover;
                         object-position: center;
+                        border-radius:10px 10px 0 0;
                 }
+        }
+        .card-status{
+                position: absolute;
+                right: 5px;
+                top: 0px;
+                margin-bottom:0;
         }
         .card-text{
                         position: relative;
                         top: 217px;
                         left: 10px;
+                        display:inline-block;
         }
 
         .card-btn{

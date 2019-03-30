@@ -9,6 +9,7 @@
     "firebase": "^5.8.2",
     "moment": "^2.24.0",
     "query-string": "^6.4.0",
+    "random-string": "^0.2.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-dropzone": "^9.0.0",

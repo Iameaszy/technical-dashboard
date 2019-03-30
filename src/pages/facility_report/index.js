@@ -49,7 +49,7 @@ export class Home extends React.Component {
 
   render() {
     const { noMoreReports, reports } = this.state;
-    const { type } = this.props;
+    const { type, toggle } = this.props;
     return (
       <React.Fragment>
         <FacilityStyle>
@@ -64,22 +64,23 @@ export class Home extends React.Component {
           <div className="home-content xs-12">
             {
            reports.map((val, ind) => (
-             <div key={ind} className="col xs-12 sm-6 md-4 ">
+             <div key={ind} className={`col xs-12 msm-6 md-4 ${toggle.show ? 'lg-3' : 'lg-4'}`}>
                <Card {...val} />
              </div>
            ))
         }
           </div>
-          {
-          type === reportActions.GET_FACILITY_REPORTS_REQUEST
-          && <p><img src={Loader} alt="Loader" /></p>
-        }
         </FacilityStyle>
         {
           noMoreReports
           && <p>No more reports</p>
         }
+        {
+          type === reportActions.GET_FACILITY_REPORTS_REQUEST
+          && <p><img src={Loader} alt="Loader" /></p>
+        }
       </React.Fragment>
+
     );
   }
 }
@@ -87,6 +88,7 @@ export class Home extends React.Component {
 const mapStatesToProps = states => ({
   type: states.report.action,
   reports: states.report.reports,
+  toggle: states.toggle,
 });
 const mapDispatchToProps = dispatch => ({
   fetchFacilityReports: (count) => {

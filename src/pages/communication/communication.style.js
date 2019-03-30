@@ -13,7 +13,8 @@ export const CommSideStyle = styled.div`
     border-right: solid 1px #cdced6;
     padding: 10px;
     position:relative;
-    transition:1s all;
+    transition:0.6s all;
+    color:#4a4040;
     @media (max-width:656px){
         width:140px;
         position: fixed;
@@ -30,9 +31,14 @@ export const CommSideStyle = styled.div`
             width: 8em;
             border: none;
             border-radius: 20px;
-            background: white;
-            box-shadow: 0px 0px 5px 0px dimgrey;
+            background: #f9f9f9;
+            box-shadow: 0px 0px 5px 0px;
             outline:none;
+
+            &:hover{
+                background:white;
+                box-shadow: 0px 0px 5px 0px;
+            }
         }
     }
     
@@ -61,7 +67,6 @@ export const CommSideStyle = styled.div`
 
 export const MainCommStyle = styled.ul`
     list-style: none;
-    padding-top:10px;
     padding-right:10px;
     height: 424px;
     overflow-y: auto;

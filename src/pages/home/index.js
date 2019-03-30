@@ -44,12 +44,12 @@ export class Home extends React.Component {
 
   updateReports() {
     const { reports } = this.state;
-    this.props.fetchReports(reports.length + 5);
+    this.props.fetchReports(reports.length + 20);
   }
 
 
   render() {
-    const { type } = this.props;
+    const { type, toggle } = this.props;
     const { reports, noMoreReports } = this.state;
     return (
       <React.Fragment>
@@ -63,7 +63,7 @@ export class Home extends React.Component {
           <div className="home-content xs-12">
             {
            reports.map((val, ind) => (
-             <div key={ind} className="col xs-12 sm-6 md-4 ">
+             <div key={ind} className={`col xs-12 msm-6 md-4 ${toggle.show ? 'lg-3' : 'lg-4'}`}>
                <Card {...val} />
              </div>
            ))
@@ -87,6 +87,7 @@ export class Home extends React.Component {
 const mapStatesToProps = states => ({
   type: states.report.action,
   reports: states.report.reports,
+  toggle: states.toggle,
 });
 const mapDispatchToProps = dispatch => ({
   fetchReports: (count) => {

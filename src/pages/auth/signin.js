@@ -2,20 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SharedStyling from './styles/shared';
 
-import facebookIcon from './assets/icons/facebook.png';
-import googleIcon from './assets/icons/google.png';
-
 import { Link, withRouter } from 'react-router-dom';
 import { validator } from '../../helpers/utils';
 import modal_actions from '../../redux/actions/modals';
 
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import auth_actions from '../../redux/actions/auth';
 
 import Icon from 'react-fa';
 import { signin } from '../../redux/action-creators/auth';
-
-import { GoogleLogin } from 'react-google-login';
+import Logo from '../../assets/logo.jpg';
 
 const mapStateToProps = (state) => {
   return {
@@ -101,8 +96,8 @@ class SignInPage extends React.PureComponent {
               onSubmit={this.onSubmit}
               onClick={(e) => e.stopPropagation()}>
               <div className="l form-group">
-                <h4 className="welcome">Welcome</h4>
-                <h6 className="notice" >Sign in to continue</h6>
+                <img src={Logo} alt="Logo" className="logo" />
+                <h2 className="notice" >Please Sign in to continue</h2>
               </div>
               <div className="form-group">
                 <input
@@ -159,7 +154,6 @@ class SignInPage extends React.PureComponent {
                   id="remember"
                   type="checkbox"
                   placeholder="Password"
-                  required
                   value={password.value}
                   onChange={this.onChange}
                 />
@@ -174,70 +168,6 @@ class SignInPage extends React.PureComponent {
                 </Link>
               </div>
 
-              <div className="social-btn-container xs-12 sm-btn-container">
-                <div className="xs-12">
-                  <GoogleLogin
-                    clientId={process.env.REACT_APP_GOOGLE_APP_ID}
-                    buttonText=""
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                    className="g-btn sm-btn xs-12"
-                    type="button">
-                    <div className="xs-100">
-                    <span className="xs-9">
-                      <div className="c-w">
-                        <div className="c t-c">Sign in with Google</div>
-                      </div>
-                    </span>
-                    <span className="xs-3">
-                      <div className="c-w">
-                        <div className="c t-c">
-                          <img
-                            className="sm-icon"
-                            src={googleIcon}
-                            alt="googleIcon"
-                          />
-                        </div>
-                      </div>
-                    </span>
-                    </div>
-                  </GoogleLogin>
-                </div>
-                <div className="xs-12">
-                  <FacebookLogin
-                    appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                    autoLoad={false}
-                    size="metro"
-                    callback={this.responseFacebook}
-                    fields="name,email,picture"
-                    disableMobileRedirect={true}
-                    render={(renderProps) => (
-                      <button
-                        className="sm-btn xs-12"
-                        type="button"
-                        onClick={renderProps.onClick}>
-                        <span className="xs-9">
-                          <div className="c-w">
-                            <div className="c t-c">Sign in with facebook</div>
-                          </div>
-                        </span>
-
-                        <span className="xs-3">
-                          <div className="c-w">
-                            <div className="c t-c">
-                              <img
-                                className="sm-icon"
-                                src={facebookIcon}
-                                alt="facebookIcon"
-                              />
-                            </div>
-                          </div>
-                        </span>
-                      </button>
-                    )}
-                  />
-                </div>
-              </div>
 
               <div className="xs-12">
                 <div className="xs-12">

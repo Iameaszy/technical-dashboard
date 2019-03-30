@@ -2,7 +2,7 @@ import React from 'react';
 import { FaRegStar } from 'react-icons/fa';
 import { ListStyle } from './list.style';
 
-const months = ['Jan', 'Feb', 'March', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 export const List = (props) => {
   const {
     uid, subject, message, from,

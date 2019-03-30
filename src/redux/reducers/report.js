@@ -85,6 +85,24 @@ export default (state = init, payload) => {
         reports: payload.reports,
       };
 
+    case reportActions.MARK_AS_SEEN_REQUEST:
+      return {
+        ...state,
+        action: reportActions.MARK_AS_SEEN_REQUEST,
+      };
+
+    case reportActions.MARK_AS_SEEN_FAILED:
+      return {
+        ...state,
+        action: reportActions.MARK_AS_SEEN_FAILED,
+        message: payload.message,
+      };
+    case reportActions.MARK_AS_SEEN_SUCCESSFUL:
+      return {
+        ...state,
+        action: reportActions.MARK_AS_SEEN_SUCCESSFUL,
+      };
+
     default:
       return state;
   }

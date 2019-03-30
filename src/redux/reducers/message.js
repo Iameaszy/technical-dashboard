@@ -22,7 +22,7 @@ export default (state = init, payload) => {
       return {
         ...state,
         type: messageActions.GET_MESSAGES_SUCCESSFUL,
-        messages: payload.messages,
+        messages: payload.messages || {},
       };
 
     case messageActions.GET_MESSAGE_REQUEST:
@@ -100,6 +100,25 @@ export default (state = init, payload) => {
         type: messageActions.SAVE_MESSAGE_SUCCESSFUL,
       };
 
+      // Delete
+    case messageActions.DELETE_MESSAGE_REQUEST:
+      return {
+        ...state,
+        type: messageActions.DELETE_MESSAGE_REQUEST,
+      };
+
+    case messageActions.DELETE_MESSAGE_FAILED:
+      return {
+        ...state,
+        type: messageActions.DELETE_MESSAGE_FAILED,
+        messages: payload.message,
+      };
+    case messageActions.DELETE_MESSAGE_SUCCESSFUL:
+      return {
+        ...state,
+        type: messageActions.DELETE_MESSAGE_SUCCESSFUL,
+        messages: payload.message,
+      };
 
     default:
       return state;

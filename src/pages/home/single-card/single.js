@@ -1,18 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import qs from 'query-string';
-import { Link } from 'react-router-dom';
 import { FaArrowCircleLeft } from 'react-icons/fa';
 import Moment from 'react-moment';
 import reportActions from '../../../redux/actions/reports';
 import * as reportActionsCreator from '../../../redux/action-creators/reports';
 import { SingleCardStyle } from './single.style';
+import Loader from '../../../assets/flickr-loader.svg';
 
 export class SingleCardPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { qs: null, report: null };
+    this.markAsSeen = this.markAsSeen.bind(this);
+  }
+
+  markAsSeen(report) {
+    this.props.markReportAsSeen(report);
   }
 
   componentDidMount() {
@@ -27,7 +32,13 @@ export class SingleCardPage extends React.PureComponent {
   componentDidUpdate(prevProps) {
     if (prevProps.type !== this.props.type && this.props.type === reportActions.GET_REPORT_SUCCESSFUL) {
       const { report } = this.props;
+      const { qs } = this.state;
       this.setState({ report: report || null });
+
+      if (report) {
+        report.id = qs.id;
+        this.markAsSeen(report);
+      }
     }
   }
 
@@ -65,7 +76,7 @@ export class SingleCardPage extends React.PureComponent {
               )
         }
         { this.props.type === reportActions.GET_REPORT_REQUEST
-            && <p>Loading</p>
+            && <p><img src={Loader} alt="loader" /></p>
         }
       </SingleCardStyle>
     );
@@ -81,5 +92,6 @@ const mapDispatchWithStates = dispatch => ({
   getReport: (id) => {
     dispatch(reportActionsCreator.fetchReport(id));
   },
+  markReportAsSeen: report => dispatch(reportActionsCreator.markAsSeen(report)),
 });
 export default connect(mapStatesWithProps, mapDispatchWithStates)(withRouter(SingleCardPage));

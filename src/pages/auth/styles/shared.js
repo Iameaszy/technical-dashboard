@@ -6,7 +6,14 @@ export default styled.div`
     color:coral;
   }
 
-  
+  .logo{
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    margin: auto;
+    margin-bottom:1rem;
+  }
   .forgot-password{
         margin: auto;
         width: 100%;
@@ -30,8 +37,9 @@ export default styled.div`
     }
     .notice{
       font-weight: 300;
-      font-size: .9375rem;
+      font-size: 1.4rem;
       color: #5d5959;
+      text-align:center;
     }
     @media (min-width: 768px) {
       border-radius: 5px;

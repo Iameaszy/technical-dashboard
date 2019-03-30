@@ -135,3 +135,22 @@ export const fetchSecurityReports = count => async (dispatch) => {
       });
     });
 };
+
+
+export const markAsSeen = report => async (dispatch) => {
+  dispatch({
+    type: reportActions.MARK_AS_SEEN_REQUEST,
+  });
+  report.seen = true;
+  reportsRef.child('tkMCkiWomNV5O8vQcHELn2K9pKR2').child(report.id).update(report).then(() => {
+    dispatch({
+      type: reportActions.MARK_AS_SEEN_SUCCESSFUL,
+    });
+  })
+    .catch((err) => {
+      dispatch({
+        type: reportActions.UPDATE_REPORT_FAILED,
+        message: err.messsage,
+      });
+    });
+};

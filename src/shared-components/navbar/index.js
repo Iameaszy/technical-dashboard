@@ -75,7 +75,7 @@ export class Navbar extends React.PureComponent {
             >
             Logout
             </span>
-            <span className="power-off-icon"><FaPowerOff /></span>
+            <span className="power-off-icon" title="logout"><FaPowerOff /></span>
           </div>
           <div className="mobile-toggle">
             <span className="toggle-icon" onClick={this.onMobileNavClick}><FaBars /></span>

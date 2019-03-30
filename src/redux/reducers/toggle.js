@@ -1,7 +1,7 @@
 import toggle_actions from '../actions/toggle';
 
 const initState = {
-  show: false,
+  show: true,
   type: toggle_actions.TOGGLE,
 };
 

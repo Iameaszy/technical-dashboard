@@ -9,6 +9,11 @@ export const ListStyle = styled.li`
         padding:5px 10px;
         border-bottom:solid 1px #f5f0f0;
         cursor:pointer;
+        transition:0.6 all;
+
+        &:hover{
+            background:#f9f9f9;
+        }
 
         p{
             margin:0;

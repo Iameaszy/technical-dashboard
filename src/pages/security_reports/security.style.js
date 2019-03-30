@@ -23,6 +23,7 @@ export const SecurityStyle = styled.div`
             background:white;
             padding:20px;
             width:100%;
+            border:solid 1px lightgray
 
             .col{
                 padding:10px;

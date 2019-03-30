@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   FaTrash, FaRegEnvelope, FaShare, FaRegFile, FaRegStar,
 } from 'react-icons/fa';
-import { MdFileUpload } from 'react-icons/md';
+
 import { createGlobalStyle } from 'styled-components';
 import {
   CommSideStyle, CommStyle, MainCommStyle,
@@ -29,14 +29,13 @@ const GlobalStyle = createGlobalStyle`
       }
 `;
 
-const options = ['Inbox', 'Sent', 'Draft', 'Starred', 'Trash'];
+const options = ['Inbox', 'Sent', 'Draft', 'Starred'];
 const setIcon = (ind) => {
   switch (ind) {
-    case 0: return <FaRegEnvelope size={11} />;
-    case 1: return <FaShare size={11} />;
-    case 2: return <FaRegFile size={11} />;
-    case 3: return <FaRegStar size={11} />;
-    default: return <FaTrash size={11} />;
+    case 0: return <FaRegEnvelope size={14} />;
+    case 1: return <FaShare size={14} />;
+    case 2: return <FaRegFile size={14} />;
+    case 3: return <FaRegStar size={14} />;
   }
 };
 export class CommunicationComponent extends React.Component {
@@ -50,9 +49,9 @@ export class CommunicationComponent extends React.Component {
       },
       mobileToggle: false,
       messages: [],
-      checkedElementId: [],
       noMoreReports: false,
       messageChecked: false,
+      controlClicked: false,
     };
     this.timeout = null;
     this.onMessageChecked = this.onMessageChecked.bind(this);
@@ -61,6 +60,7 @@ export class CommunicationComponent extends React.Component {
     this.handleOptionsClick = this.handleOptionsClick.bind(this);
     this.setNotification = this.setNotification.bind(this);
     this.handleMobileToggle = this.handleMobileToggle.bind(this);
+    this.deleteCheckedMessages = this.deleteCheckedMessages.bind(this);
   }
 
   componentDidMount() {
@@ -69,10 +69,14 @@ export class CommunicationComponent extends React.Component {
     window.addEventListener('scroll', this.handleScroll);
   }
 
-  handleMobileToggle() {
+  handleMobileToggle(status) {
     const { mobileToggle } = this.state;
-    console.log('hello');
-    this.setState({ mobileToggle: !mobileToggle });
+    this.setState({ mobileToggle: status || !mobileToggle });
+  }
+
+  deleteCheckedMessages() {
+    const { messages } = this.state;
+    this.props.deleteMessages(messages);
   }
 
   onMessageChecked(id) {
@@ -152,9 +156,13 @@ export class CommunicationComponent extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.message.type !== this.props.message.type && nextProps.message.type === messageAction.SEND_MESSAGE_SUCCESSFUL) {
       this.setNotification();
+      if (this.state.controlClicked) {
+        this.handleMobileToggle(false);
+        this.setState({ controlClicked: false });
+      }
     }
 
-    if (nextProps.message.type === messageAction.GET_MESSAGES_SUCCESSFUL) {
+    if (nextProps.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || nextProps.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL) {
       const messages = Object.keys(nextProps.message.messages).map((val) => {
         const data = { ...nextProps.message.messages[val] };
         data.id = val;
@@ -169,6 +177,11 @@ export class CommunicationComponent extends React.Component {
           window.removeEventListener('scroll', this.handleScroll);
         }
       });
+
+      if (this.state.controlClicked) {
+        this.handleMobileToggle(false);
+        this.setState({ controlClicked: false });
+      }
     }
   }
 
@@ -182,11 +195,13 @@ export class CommunicationComponent extends React.Component {
 
   handleOptionsClick(ind) {
     const { auth } = this.props;
+    this.setState({ controlClicked: true });
     switch (ind) {
       case 0: this.props.fetchMessages(auth.data); break;
       case 1: this.props.fetchSentMessages(); break;
+      case 2: this.props.fetchDrafts(); break;
       case 3: this.props.fetchStarredMessages(); break;
-      default: break;
+      default: this.props.fetchTrash();
     }
   }
 
@@ -198,13 +213,14 @@ export class CommunicationComponent extends React.Component {
       type, compose, show, closeCompose, message, auth, sendMessage,
     } = this.props;
     const { messages } = this.state;
+
     return (
       <React.Fragment>
-        <GlobalStyle />
+        {/* <GlobalStyle /> */}
         <Notification {...notification}>
           {notificationMessage}
         </Notification>
-        <Control onToggled={this.handleMobileToggle} checkAllLists={this.checkAllLists} checked={this.state.messageChecked} />
+        <Control onMessageDelete={this.deleteCheckedMessages} onToggled={this.handleMobileToggle} checkAllLists={this.checkAllLists} checked={this.state.messageChecked} />
         <CommStyle>
           <CommSideStyle className="comm-sidebar" toggled={mobileToggle}>
             <div className="compose-btn-container">
@@ -230,8 +246,13 @@ export class CommunicationComponent extends React.Component {
             </ul>
           </CommSideStyle>
           <MainCommStyle className="xs-12">
-            {this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL && messages.map((val, ind) => <List onStarChecked={this.onStarChecked} key={ind} {...val} onMessageChecked={this.onMessageChecked} />)
+            {(this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || this.props.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL) && messages.map((val, ind) => <List onStarChecked={this.onStarChecked} key={ind} {...val} onMessageChecked={this.onMessageChecked} />)
               }
+
+            {this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL
+            && messages.length <= 0 && <p>No Message</p>
+              }
+
             {
                 this.props.message.type === messageAction.GET_MESSAGES_REQUEST
                 && <p><img src={Loader} alt="loader" /></p>
@@ -267,6 +288,8 @@ const mapDispatchToProps = dispatch => ({
   fetchSentMessages: count => dispatch(messageActionCreators.fetchSentMessages(count)),
   fetchStarredMessages: count => dispatch(messageActionCreators.fetchStarredMessages(count)),
   markAsImportant: (id, star) => dispatch(messageActionCreators.starMessage(id, star)),
+  fetchDrafts: () => dispatch(messageActionCreators.fetchDrafts()),
+  deleteMessages: messages => dispatch(messageActionCreators.deleteMessages(messages)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommunicationComponent);

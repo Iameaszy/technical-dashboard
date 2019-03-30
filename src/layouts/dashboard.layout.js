@@ -90,7 +90,7 @@ export class DashboardLayout extends React.Component {
               <HomeStyle>
                 <div className="side-bar">
                   <div onClick={() => this.navigate('/')} className={path === '/' ? 'fa-home menu active' : 'fa-home menu'}>
-                    <span className="home-icon" onClick={this.onToggleClick}>
+                    <span title="Dashboard" className="home-icon" onClick={this.onToggleClick}>
                       <TiHomeOutline size={20} />
                     </span>
                     {
@@ -104,7 +104,7 @@ export class DashboardLayout extends React.Component {
 
                   </div>
                   <div onClick={() => this.navigate('/facility')} className={path === '/facility' ? 'fa-facility menu active' : 'fa-facility menu'}>
-                    <span className="home-icon">
+                    <span className="home-icon" title="Facility">
                       <FaTh size={20} />
                     </span>
                     {
@@ -118,7 +118,7 @@ export class DashboardLayout extends React.Component {
 
                   </div>
                   <div onClick={() => this.navigate('/security')} className={path === '/security' ? 'fa-security menu active' : 'fa-security menu'}>
-                    <span className="home-icon">
+                    <span className="home-icon" title="Security">
                       <FaShieldAlt size={20} />
                     </span>
                     {
@@ -131,7 +131,7 @@ export class DashboardLayout extends React.Component {
                           }
                   </div>
                   <div onClick={() => this.navigate('/communication')} className={path === '/communication' ? 'fa-communication menu active' : 'fa-home menu'}>
-                    <span className="home-icon">
+                    <span className="home-icon" title="Communication">
                       <FaRegEnvelope size={20} />
                     </span>
                     {
@@ -145,7 +145,7 @@ export class DashboardLayout extends React.Component {
 
                   </div>
                   <div onClick={() => this.navigate('/notice')} className={path === '/notice' ? 'fa-notice menu active' : 'fa-notice menu'}>
-                    <span className="home-icon">
+                    <span className="home-icon" title="Notice">
                       <FaRegClone size={20} />
                     </span>
                     {
