@@ -82,7 +82,7 @@ export const NavbarStyle = styled.div`
         }
     }
     @media only screen and (max-width: 991px){
-        margin-left:30px !important;
+        margin-left:0px !important;
     }
 }
 `;

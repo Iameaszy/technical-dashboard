@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaRegStar } from 'react-icons/fa';
+import moment from 'moment';
 import { ListStyle } from './list.style';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -9,8 +10,7 @@ export const List = (props) => {
     date, onStarChecked, onMessageChecked, id, checked,
     important,
   } = props;
-
-  const myDate = new Date(date || null);
+  const myDate = moment(date || []);
   return (
     <ListStyle dataMsgID={uid}>
       <div className="controls">
@@ -44,12 +44,13 @@ export const List = (props) => {
           </span>
           <div className="preview-text" dangerouslySetInnerHTML={{ __html: message }} />
           <div className="date">
-            <span className="day">{myDate.getDay()}</span>
-            <span className="month">{months[myDate.getMonth()]}</span>
+            <span className="day">{myDate.date()}</span>
+            <span className="month">{months[myDate.month()]}</span>
             {
-              myDate.getFullYear() !== (new Date()).getFullYear()
-              && <span className="year">{myDate.getFullYear()}</span>
+              myDate.year() !== (new Date()).getFullYear()
+              && <span className="year">{myDate.year()}</span>
             }
+
           </div>
         </div>
       </div>

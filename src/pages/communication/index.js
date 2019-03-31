@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  FaTrash, FaRegEnvelope, FaShare, FaRegFile, FaRegStar,
+  FaRegEnvelope, FaShare, FaRegFile, FaRegStar,
 } from 'react-icons/fa';
 
 import { createGlobalStyle } from 'styled-components';
@@ -162,6 +162,9 @@ export class CommunicationComponent extends React.Component {
       }
     }
 
+    if (nextProps.show === true && nextProps.type === modalActions.SHOW_COMPOSE_MESSAGE) {
+      this.handleMobileToggle(false);
+    }
     if (nextProps.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || nextProps.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL) {
       const messages = Object.keys(nextProps.message.messages).map((val) => {
         const data = { ...nextProps.message.messages[val] };
@@ -253,7 +256,7 @@ export class CommunicationComponent extends React.Component {
             </ul>
           </CommSideStyle>
           <MainCommStyle className="xs-12">
-            {(this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || this.props.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL) && messages.map((val, ind) => <List onStarChecked={this.onStarChecked} key={ind} {...val} onMessageChecked={this.onMessageChecked} />)
+            {(this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || this.props.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL || this.props.message.type === messageAction.SEND_MESSAGE_SUCCESSFUL) && messages.map((val, ind) => <List onStarChecked={this.onStarChecked} key={ind} {...val} onMessageChecked={this.onMessageChecked} />)
               }
 
             {this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL

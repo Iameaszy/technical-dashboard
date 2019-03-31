@@ -11,6 +11,7 @@ export const ControlStyle = styled.ul`
         margin-left: 156px;
         @media (max-width:656px){
             margin-left:0;
+            margin-bottom:0;
         }
         
         .delete-modal{
@@ -19,8 +20,8 @@ export const ControlStyle = styled.ul`
           line-height: 1.2;
           padding: 10px;
           color: #444;
-          position: absolute;
-          opacity:${props => (props.status ? 1 : 0)};
+          position: fixed;
+          opacity:1;
           z-index:${props => (props.status ? 16 : -1)};
           transition:1s all;
           top:${props => (props.status ? '76px' : '-200px')};
@@ -101,6 +102,7 @@ export const ControlStyle = styled.ul`
         }
 
         .list-item-sm{
+          margin-left:30px;
           @media (min-width:657px){
               display:none;
           }

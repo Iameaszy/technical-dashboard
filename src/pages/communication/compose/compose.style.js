@@ -4,7 +4,7 @@ export const ComposeStyle = styled.div`
     position:fixed;
     top:90px;
     left:28%;
-    height:372px;
+    /*height:372px;*/
     border-radius: 5px;
     line-height:1.2;
     box-shadow: 0 0 5px 1px #bfb7b7;
@@ -13,6 +13,12 @@ export const ComposeStyle = styled.div`
 
     .text-muted{
         display:none;
+    }
+    .textarea{
+        width:100%;
+        border: none;
+        border-bottom: solid 1px lightgray;
+        padding: 10px;
     }
     .clearfix{
         clear:both;
@@ -66,30 +72,26 @@ export const ComposeStyle = styled.div`
                 padding:0 10px;
             }
 
-            .quill{
-                display: flex;
-                flex-direction: column-reverse;            
-            }
+            .btn-group{
+                text-align:left;
+                text-align: left;
+                padding: 3px;
+                margin-top: -3px;
+                .send-btn,.save-btn{
+                    border: none;
+                    padding: 10px 25px;
+                    outline: none;
+                    border-radius: 5px;
+                    color: white;
+                    background: #5656fb;
+                }
 
-            .ql-container{
-                height: 230px;
-                border-bottom: none;
+                .save-btn{
+                    margin-left:10px;
+                    background: cadetblue;
+                }
             }
-            .ql-toolbar{
-                border-bottom:0;
-                padding-left:30px;
-            }
-            .send-btn{
-                position: absolute;
-                bottom: 1.5px;
-                left: 2px;
-                border: none;
-                padding: 10px 14px;
-                outline: none;
-                border-radius: 5px;
-                color: white;
-                background: #5656fb;
-            }
+            
         }
     }
 `;

@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactQuill from 'react-quill';
 import Icon from 'react-fa';
 import { withRouter } from 'react-router-dom';
 import { ComposeStyle } from './compose.style';
 import { validator } from '../../../helpers/utils';
-import 'react-quill/dist/quill.snow.css'; // ES6
 import messageAction from '../../../redux/actions/message';
 
 export class ComposeComponent extends React.Component {
@@ -18,7 +16,6 @@ export class ComposeComponent extends React.Component {
       },
       toSubmit: {},
     };
-    this.handleQuilChange = this.handleQuilChange.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -41,6 +38,7 @@ export class ComposeComponent extends React.Component {
     const { auth, sendMessage } = this.props;
     const { toSubmit } = this.state;
     const newObj = { ...toSubmit, uid: auth.data.uid, from: auth.data.email };
+
     if (auth.isAuthenticated) {
       sendMessage(newObj);
     } else {
@@ -67,7 +65,7 @@ export class ComposeComponent extends React.Component {
     const validCount = formKeys.filter(k => form[k].valid === true).length;
     const allFieldsAreValid = validCount === formKeys.length;
     return (
-      <ComposeStyle className="xs-7 sm-6">
+      <ComposeStyle className="xs-8 sm-6">
         <header className="header">
           <p className="title">New Message</p>
           <div className="compose-controls">
@@ -102,29 +100,46 @@ export class ComposeComponent extends React.Component {
               <small id="helpId" className="text-muted">To</small>
             </div>
             <div className="form-group xs-12">
-              <ReactQuill
-                value={message.value}
-                onChange={this.handleQuilChange}
-              />
+              <textarea onChange={(e) => { this.onInputChange(e); }} name="message" value={message.value} id="message" className="textarea" rows="5" placeholder="Compose Message" />
             </div>
             <div className="clearfix" />
-            {(messageProps.type === messageAction.SEND_MESSAGE_REQUEST || messageProps.type === messageAction.GET_MESSAGES_REQUEST) ? (
-              <button
-                type="submit"
-                className="send-btn"
-                disabled={allFieldsAreValid !== true}
-              >
-                <Icon name="spinner" spin />
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="send-btn"
-                disabled={allFieldsAreValid !== true}
-              >
+            <div className="form-group btn-group xs-12">
+              {(messageProps.type === messageAction.SEND_MESSAGE_REQUEST) ? (
+                <button
+                  type="submit"
+                  className="send-btn"
+                  disabled={allFieldsAreValid !== true}
+                >
+                  <Icon name="spinner" spin />
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="send-btn"
+                  disabled={allFieldsAreValid !== true}
+                >
                     Send
-              </button>
-            )}
+                </button>
+              )}
+              {(messageProps.type === messageAction.SEND_MESSAGE_REQUEST) ? (
+                <button
+                  type="button"
+                  className="save-btn"
+                  disabled={allFieldsAreValid !== true}
+                >
+                  <Icon name="spinner" spin />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="save-btn"
+                  disabled={allFieldsAreValid !== true}
+                >
+                    Save
+                </button>
+              )}
+            </div>
+
           </form>
         </main>
       </ComposeStyle>
