@@ -5,6 +5,9 @@ import {
 } from 'react-icons/fa';
 
 import { createGlobalStyle } from 'styled-components';
+import moment from 'moment';
+import toggleActions from '../../redux/actions/toggle';
+
 import {
   CommSideStyle, CommStyle, MainCommStyle,
 } from './communication.style';
@@ -49,7 +52,6 @@ export class CommunicationComponent extends React.Component {
       },
       mobileToggle: false,
       messages: [],
-      noMoreReports: false,
       messageChecked: false,
       controlClicked: false,
     };
@@ -61,6 +63,8 @@ export class CommunicationComponent extends React.Component {
     this.setNotification = this.setNotification.bind(this);
     this.handleMobileToggle = this.handleMobileToggle.bind(this);
     this.deleteCheckedMessages = this.deleteCheckedMessages.bind(this);
+    this.onMessageClicked = this.onMessageClicked.bind(this);
+    this.closeMobileNav = this.closeMobileNav.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +76,10 @@ export class CommunicationComponent extends React.Component {
   handleMobileToggle(status) {
     const { mobileToggle } = this.state;
     this.setState({ mobileToggle: status || !mobileToggle });
+  }
+
+  onMessageClicked(id) {
+    this.props.history.push(`/communication/message?id=${id}`);
   }
 
   deleteCheckedMessages() {
@@ -153,6 +161,11 @@ export class CommunicationComponent extends React.Component {
     }
   }
 
+  closeMobileNav() {
+    const { closeMobileNavigation } = this.props;
+    closeMobileNavigation();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.message.type !== this.props.message.type && nextProps.message.type === messageAction.SEND_MESSAGE_SUCCESSFUL) {
       this.setNotification();
@@ -165,7 +178,8 @@ export class CommunicationComponent extends React.Component {
     if (nextProps.show === true && nextProps.type === modalActions.SHOW_COMPOSE_MESSAGE) {
       this.handleMobileToggle(false);
     }
-    if (nextProps.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || nextProps.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL) {
+    if (nextProps.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || nextProps.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL || nextProps.message.type === messageAction.GET_MESSAGE_SUCCESSFUL) {
+      this.closeMobileNav();
       const messages = Object.keys(nextProps.message.messages).map((val) => {
         const data = { ...nextProps.message.messages[val] };
         data.id = val;
@@ -220,7 +234,7 @@ export class CommunicationComponent extends React.Component {
     const { type: notificationType, message: notificationMessage } = notification;
     const Notification = NotificationComponents[notificationType];
     const {
-      type, compose, show, closeCompose, message, auth, sendMessage,
+      type, compose, show, closeCompose, message, auth, sendMessage, getMessage,
     } = this.props;
     const { messages } = this.state;
 
@@ -256,7 +270,19 @@ export class CommunicationComponent extends React.Component {
             </ul>
           </CommSideStyle>
           <MainCommStyle className="xs-12">
-            {(this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || this.props.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL || this.props.message.type === messageAction.SEND_MESSAGE_SUCCESSFUL) && messages.map((val, ind) => <List onStarChecked={this.onStarChecked} key={ind} {...val} onMessageChecked={this.onMessageChecked} />)
+            {(this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || this.props.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL || this.props.message.type === messageAction.SEND_MESSAGE_SUCCESSFUL) && messages.map((val, ind) => <List getMessage={getMessage} onMessageClicked={this.onMessageClicked} onStarChecked={this.onStarChecked} key={ind} {...val} onMessageChecked={this.onMessageChecked} />)
+              }
+
+            {
+                this.props.message.type === messageAction.GET_MESSAGE_SUCCESSFUL
+                && messages.map(message => (
+                  <li className="message-wrapper">
+                    <h2 className="subject">{message.subject}</h2>
+                    <h3 className="from">{message.from}</h3>
+                    <h4 className="date">{moment(message.date).toLocaleString()}</h4>
+                    <p className="message">{message.message}</p>
+                  </li>
+                ))
               }
 
             {this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL
@@ -293,6 +319,9 @@ const mapDispatchToProps = dispatch => ({
   clearMessageAction: () => {
     dispatch({ type: modalActions.SHOW_COMPOSE_MESSAGE, display: false });
   },
+  closeMobileNavigation: () => {
+    dispatch({ type: toggleActions.TOGGLE, nav: false });
+  },
   sendMessage: obj => dispatch(messageActionCreators.sendMessage(obj)),
   fetchMessages: (obj) => { dispatch(messageActionCreators.fetchMessages(obj)); },
   fetchSentMessages: count => dispatch(messageActionCreators.fetchSentMessages(count)),
@@ -300,6 +329,10 @@ const mapDispatchToProps = dispatch => ({
   markAsImportant: (id, star) => dispatch(messageActionCreators.starMessage(id, star)),
   fetchDrafts: () => dispatch(messageActionCreators.fetchDrafts()),
   deleteMessages: messages => dispatch(messageActionCreators.deleteMessages(messages)),
+  getMessage: (id) => {
+    dispatch(messageActionCreators.fetchMessage(id));
+  },
+  markMessageAsRead: msg => dispatch(messageActionCreators.markAsRead(msg)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommunicationComponent);

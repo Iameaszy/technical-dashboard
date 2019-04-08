@@ -71,4 +71,24 @@ export const MainCommStyle = styled.ul`
     height: 424px;
     overflow-y: auto;
     margin:0;
+
+    .message-wrapper{
+        line-height: 1.2;
+        text-align: left;
+        padding:10px;
+        color:#4a4040;
+
+        .from{
+            color: #C25FB3;
+        }
+
+        .date{
+            color:#a2a1a1;
+        }
+
+        .message{
+            margin-top: 65px;
+            height: 247px;
+        }
+    }
 `;

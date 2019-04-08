@@ -8,6 +8,8 @@ import { NoticeStyle } from './notice.style';
 import * as noticeActionCreators from '../../redux/action-creators/notice';
 import noticeActions from '../../redux/actions/notice';
 import 'react-quill/dist/quill.snow.css'; // ES6
+import toggleActions from '../../redux/actions/toggle';
+
 
 export class NoticePage extends React.Component {
   constructor(props) {
@@ -23,6 +25,7 @@ export class NoticePage extends React.Component {
     this.onCancel = this.onCancel.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
     this.handleQuilChange = this.handleQuilChange.bind(this);
+    this.closeMobileNav = this.closeMobileNav.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -36,6 +39,15 @@ export class NoticePage extends React.Component {
     }));
   }
 
+
+  closeMobileNav() {
+    const { closeMobileNavigation } = this.props;
+    closeMobileNavigation();
+  }
+
+  componentWillMount() {
+    this.closeMobileNav();
+  }
 
   onDrop(files) {
     this.setState({ files });
@@ -209,6 +221,9 @@ const mapPropsToStates = states => ({
 const mapDispatchToStates = dispatch => ({
   uploadImages: images => dispatch(noticeActionCreators.uploadImages(images)),
   uploadText: text => dispatch(noticeActionCreators.uploadText(text)),
+  closeMobileNavigation: () => {
+    dispatch({ type: toggleActions.TOGGLE, nav: false });
+  },
 });
 
 export default connect(mapPropsToStates, mapDispatchToStates)(NoticePage);

@@ -10,6 +10,19 @@ export const ListStyle = styled.li`
         border-bottom:solid 1px #f5f0f0;
         cursor:pointer;
         transition:0.6 all;
+        position:relative;
+
+        .mobile-li{
+            position: absolute;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+
+            @media (max-width:656px){
+                display:none;
+            }
+        }
 
         &:hover{
             background:#f9f9f9;

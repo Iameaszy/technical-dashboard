@@ -5,6 +5,7 @@ import * as reportMethods from '../../redux/action-creators/reports';
 import reportActions from '../../redux/actions/reports';
 import Card from '../../shared-components/card';
 import Loader from '../../assets/flickr-loader.svg';
+import toggleActions from '../../redux/actions/toggle';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export class Home extends React.Component {
     this.updateReports = this.updateReports.bind(this);
     this.state = { reports: [], noMoreReports: false };
     this.handleScroll = this.handleScroll.bind(this);
+    this.closeMobileNav = this.closeMobileNav.bind(this);
     this.windowEvent = null;
   }
 
@@ -21,6 +23,11 @@ export class Home extends React.Component {
     }
   }
 
+  closeMobileNav() {
+    const { closeMobileNavigation } = this.props;
+    closeMobileNavigation();
+  }
+
   componentDidMount() {
     this.updateReports();
     this.windowEvent = window.addEventListener('scroll', this.handleScroll);
@@ -28,6 +35,7 @@ export class Home extends React.Component {
 
   componentDidUpdate(prevProps, prevStates) {
     if (prevProps.type !== this.props.type && this.props.type === reportActions.GET_FACILITY_REPORTS_SUCCESSFUL) {
+      this.closeMobileNav();
       const reports = Object.keys(this.props.reports).map((val, ind) => {
         const data = { ...this.props.reports[val] };
         data.id = val;
@@ -93,6 +101,9 @@ const mapStatesToProps = states => ({
 const mapDispatchToProps = dispatch => ({
   fetchFacilityReports: (count) => {
     dispatch(reportMethods.fetchFacilityReports(count));
+  },
+  closeMobileNavigation: () => {
+    dispatch({ type: toggleActions.TOGGLE, nav: false });
   },
 });
 

@@ -3,6 +3,7 @@ import toggle_actions from '../actions/toggle';
 const initState = {
   show: true,
   type: toggle_actions.TOGGLE,
+  nav: false,
 };
 
 export default (state = initState, payload) => {
@@ -10,7 +11,8 @@ export default (state = initState, payload) => {
     case toggle_actions.TOGGLE:
       return {
         show: payload.show,
-        type: toggle_actions.TOGGLE,
+        type: toggle_actions.TOGGLE || false,
+        nav: payload.nav || false,
       };
 
     default:

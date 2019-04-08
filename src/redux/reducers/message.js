@@ -120,6 +120,26 @@ export default (state = init, payload) => {
         messages: payload.message,
       };
 
+
+    case messageActions.MARK_AS_READ_REQUEST:
+      return {
+        ...state,
+        action: messageActions.MARK_AS_READ_REQUEST,
+      };
+
+    case messageActions.MARK_AS_READ_FAILED:
+      return {
+        ...state,
+        action: messageActions.MARK_AS_READ_FAILED,
+        message: payload.message,
+      };
+    case messageActions.MARK_AS_READ_SUCCESSFUL:
+      return {
+        ...state,
+        action: messageActions.MARK_AS_READ_SUCCESSFUL,
+      };
+
+
     default:
       return state;
   }

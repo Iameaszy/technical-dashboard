@@ -46,6 +46,11 @@ export const CardStyle = styled.div`
                 right: 5px;
                 top: 0px;
                 margin-bottom:0;
+
+                
+                @media (max-width: 576px){
+                        top:12px;
+                }
         }
         .card-text{
                         position: relative;

@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { TiHomeOutline } from 'react-icons/ti';
 import {
   FaPowerOff, FaBars, FaEnvelope,
-  FaTh, FaShieldAlt, FaRegEnvelope, FaRegClone, FaUserFriends,
+  FaTh, FaShieldAlt, FaRegEnvelope, FaRegClone,
 } from 'react-icons/fa';
 import { withRouter } from 'react-router-dom';
 import { NavbarStyle, NavMobile } from './navbar.style';
-import toggle_actions from '../../redux/actions/toggle';
+import toggleActions from '../../redux/actions/toggle';
 import { signout } from '../../redux/action-creators/auth';
 import Logo from '../../assets/logo.jpg';
 
@@ -16,20 +16,21 @@ export class Navbar extends React.PureComponent {
     super(props);
     this.onToggleClick = this.onToggleClick.bind(this);
     this.onMobileNavClick = this.onMobileNavClick.bind(this);
-    this.state = { toggled: false };
     this.navigate = this.navigate.bind(this);
   }
 
   onToggleClick() {
-    const { type, status, toggled } = this.props;
-    if (type === toggle_actions.TOGGLE) {
-      toggled(!status);
+    const { type, show, toggled } = this.props;
+    if (type === toggleActions.TOGGLE) {
+      toggled(!show);
     }
   }
 
   onMobileNavClick() {
-    const { toggled } = this.state;
-    this.setState({ toggled: !toggled });
+    const { type, nav, navToggle } = this.props;
+    if (type === toggleActions.TOGGLE) {
+      navToggle(!nav);
+    }
   }
 
   navigate(url) {
@@ -37,32 +38,30 @@ export class Navbar extends React.PureComponent {
   }
 
   render() {
-    const { type, status, logout } = this.props;
-    const { toggled } = this.state;
+    const {
+      type, show, nav, logout,
+    } = this.props;
+
     return (
       <NavbarStyle>
         {
-          type === toggle_actions.TOGGLE && status === true
-          && (
-          <p className="left-block" style={{ marginLeft: '70px' }}>
+          type === toggleActions.TOGGLE && show === true
+            ? (
+              <p className="left-block" style={{ marginLeft: '70px' }}>
 
-            <span className="bars-icon" onClick={this.onToggleClick}><FaBars /></span>
+                <span className="bars-icon" onClick={this.onToggleClick}><FaBars /></span>
 
-            <div><img className="logo" src={Logo} alt="Logo" /></div>
-          </p>
-          )
-        }
+                <div><a href="/" title="Reporter"><img className="logo" src={Logo} alt="Logo" /></a></div>
+              </p>
+            )
+            : (
+              <p className="left-block" style={{ marginLeft: '260px' }}>
 
-        {
-          type === toggle_actions.TOGGLE && status === false
-          && (
-          <p className="left-block" style={{ marginLeft: '260px' }}>
+                <span className="bars-icon" onClick={this.onToggleClick}><FaBars /></span>
 
-            <span className="bars-icon" onClick={this.onToggleClick}><FaBars /></span>
-
-            <div><img className="logo" src={Logo} alt="Logo" /></div>
-          </p>
-          )
+                <div><a href="/" title="Reporter"><img className="logo" src={Logo} alt="Logo" /></a></div>
+              </p>
+            )
         }
 
         <div className="right-block">
@@ -81,9 +80,10 @@ export class Navbar extends React.PureComponent {
           <div className="mobile-toggle">
             <span className="toggle-icon" onClick={this.onMobileNavClick}><FaBars /></span>
           </div>
+
         </div>
 
-        <NavMobile className="mobile-nav-bar" style={{ right: !toggled ? '-300px' : '0' }}>
+        <NavMobile className="mobile-nav-bar" style={{ right: type === toggleActions.TOGGLE && !nav ? '-300px' : '0' }}>
           <ul className="nav">
             <li onClick={() => this.navigate('/message')} className="nav-list message">
               <span className="icon">
@@ -144,12 +144,16 @@ export class Navbar extends React.PureComponent {
 
 const mapStateToProps = state => ({
   type: state.toggle.type,
-  status: state.toggle.show,
+  show: state.toggle.show,
+  nav: state.toggle.nav,
 });
 
 const mapDispatchToProps = dispatch => ({
   toggled: (show) => {
-    dispatch({ type: toggle_actions.TOGGLE, show });
+    dispatch({ type: toggleActions.TOGGLE, show });
+  },
+  navToggle: (nav) => {
+    dispatch({ type: toggleActions.TOGGLE, nav });
   },
   logout: () => {
     signout();

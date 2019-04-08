@@ -8,11 +8,18 @@ export const List = (props) => {
   const {
     uid, subject, message, from,
     date, onStarChecked, onMessageChecked, id, checked,
-    important,
+    important, onMessageClicked, getMessage,
   } = props;
   const myDate = moment(date || []);
   return (
-    <ListStyle dataMsgID={uid}>
+    <ListStyle dataMsgID={uid} onClick={() => onMessageClicked(id)}>
+      <p
+        className="mobile-li"
+        onClick={(e) => {
+          e.stopPropagation();
+          getMessage(id);
+        }}
+      />
       <div className="controls">
         <div className="group">
           <input

@@ -5,7 +5,7 @@ export const ComposeStyle = styled.div`
     top:90px;
     left:28%;
     /*height:372px;*/
-    border-radius: 5px;
+    border-radius: 10px;
     line-height:1.2;
     box-shadow: 0 0 5px 1px #bfb7b7;
     z-index:1;
@@ -26,6 +26,7 @@ export const ComposeStyle = styled.div`
     .header{
         background: #404040;
         color: white;
+        border-radius:10px 10px 0 0;
 
         .title{
             display: inline-block;

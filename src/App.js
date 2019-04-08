@@ -22,6 +22,7 @@ import DefaultLayout from './layouts/default.layout';
 import LoadingLayout from './layouts/loading.layout';
 import DashboardLayout from './layouts/dashboard.layout';
 import SingleCardComponent from './pages/home/single-card/single';
+import MessagePage from './pages/communication/message/message';
 
 const Routes = () => (
   <Router>
@@ -48,6 +49,7 @@ const Routes = () => (
         <Route component={signin} exact path="/signin" />
         <Route component={signup} exact path="/signup" />
         <DashboardLayout component={SingleCardComponent} exact path="/card" />
+        <DashboardLayout component={MessagePage} exact path="/communication/message" />
         <DefaultLayout component={NotFound} />
       </Switch>
     </Suspense>

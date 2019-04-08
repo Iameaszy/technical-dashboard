@@ -149,7 +149,7 @@ export const markAsSeen = report => async (dispatch) => {
   })
     .catch((err) => {
       dispatch({
-        type: reportActions.UPDATE_REPORT_FAILED,
+        type: reportActions.MARK_AS_SEEN_FAILED,
         message: err.messsage,
       });
     });

@@ -125,6 +125,7 @@ export const fetchStarredMessages = count => async (dispatch) => {
   });
 };
 
+
 export const deleteMessages = messages => async (dispatch) => {
   dispatch({
     type: messageActions.DELETE_MESSAGE_REQUEST,
@@ -161,6 +162,25 @@ export const starMessage = (id, star) => (dispatch) => {
       dispatch({
         type: messageActions.GET_MESSAGES_FAILED,
         messages: error.message,
+      });
+    });
+};
+
+
+export const markAsRead = msg => async (dispatch) => {
+  dispatch({
+    type: messageActions.MARK_AS_READ_REQUEST,
+  });
+  msg.viewed = true;
+  messageRef.child(msg.id).update(msg).then(() => {
+    dispatch({
+      type: messageActions.MARK_AS_READ_SUCCESSFUL,
+    });
+  })
+    .catch((err) => {
+      dispatch({
+        type: messageActions.MARK_AS_READ_FAILED,
+        message: err.message,
       });
     });
 };
