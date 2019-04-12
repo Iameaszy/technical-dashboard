@@ -30,13 +30,13 @@ export class Home extends React.Component {
   }
 
   componentDidMount() {
+    this.closeMobileNav();
     this.updateReports();
     this.windowEvent = window.addEventListener('scroll', this.handleScroll);
   }
 
   componentDidUpdate(prevProps, prevStates) {
     if (prevProps.type !== this.props.type && this.props.type === reportActions.GET_SECURITY_REPORTS_SUCCESSFUL) {
-      this.closeMobileNav();
       const reports = Object.keys(this.props.reports).map((val, ind) => {
         const data = { ...this.props.reports[val] };
         data.id = val;

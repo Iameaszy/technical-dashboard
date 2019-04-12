@@ -78,8 +78,11 @@ export const NoticeStyle = styled.div`
         .text-wrapper{
             padding:10px;
             position: relative;
-            top: -58px;
-
+           
+            
+            @media only screen and (max-width: 767px){
+                top: -58px;
+            }
             .title{
                 margin-bottom:25px;
             }

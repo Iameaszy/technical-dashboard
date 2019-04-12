@@ -94,11 +94,11 @@ export class DashboardLayout extends React.Component {
                       <TiHomeOutline size={20} />
                     </span>
                     {
-                            type === toggle_actions.TOGGLE && status === true
+                            type === toggle_actions.TOGGLE && status === false
                             && <span className="home-text" style={{ display: 'none' }}>Dashboard</span>
                           }
                     {
-                            type === toggle_actions.TOGGLE && status === false
+                            type === toggle_actions.TOGGLE && status === true
                             && <div className="home-text">Dashboard</div>
                           }
 
@@ -108,11 +108,11 @@ export class DashboardLayout extends React.Component {
                       <FaTh size={20} />
                     </span>
                     {
-                            type === toggle_actions.TOGGLE && status === true
+                            type === toggle_actions.TOGGLE && status === false
                             && <span className="home-text" style={{ display: 'none' }}>Facility Reports</span>
                           }
                     {
-                            type === toggle_actions.TOGGLE && status === false
+                            type === toggle_actions.TOGGLE && status === true
                             && <span className="home-text">Facility Reports</span>
                           }
 
@@ -122,11 +122,11 @@ export class DashboardLayout extends React.Component {
                       <FaShieldAlt size={20} />
                     </span>
                     {
-                            type === toggle_actions.TOGGLE && status === true
+                            type === toggle_actions.TOGGLE && status === false
                             && <span className="home-text" style={{ display: 'none' }}>Security Reports</span>
                           }
                     {
-                            type === toggle_actions.TOGGLE && status === false
+                            type === toggle_actions.TOGGLE && status === true
                             && <span className="home-text">Security Reports</span>
                           }
                   </div>
@@ -135,11 +135,11 @@ export class DashboardLayout extends React.Component {
                       <FaRegEnvelope size={20} />
                     </span>
                     {
-                            type === toggle_actions.TOGGLE && status === true
+                            type === toggle_actions.TOGGLE && status === false
                             && <span className="home-text" style={{ display: 'none' }}>Communications</span>
                           }
                     {
-                            type === toggle_actions.TOGGLE && status === false
+                            type === toggle_actions.TOGGLE && status === true
                             && <span className="home-text">Communications</span>
                           }
 
@@ -149,14 +149,13 @@ export class DashboardLayout extends React.Component {
                       <FaRegClone size={20} />
                     </span>
                     {
-                            type === toggle_actions.TOGGLE && status === true
+                            type === toggle_actions.TOGGLE && status === false
                             && <span className="home-text" style={{ display: 'none' }}>Notice Board</span>
                           }
                     {
-                            type === toggle_actions.TOGGLE && status === false
+                            type === toggle_actions.TOGGLE && status === true
                             && <span className="home-text">Notice Board</span>
                           }
-
                   </div>
                 </div>
                 <div className="content">

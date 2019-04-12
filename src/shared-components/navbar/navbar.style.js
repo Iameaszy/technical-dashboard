@@ -77,6 +77,11 @@ export const NavbarStyle = styled.div`
         margin-right:10px;
         line-height:0.5;
         cursor:pointer;
+        margin-top:10px;
+
+        &:hover{
+            color:lightgray;
+        }
         @media only screen and (max-width: 991px){
         display:none;
         }

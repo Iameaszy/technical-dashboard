@@ -53,10 +53,16 @@ export const CardStyle = styled.div`
                 }
         }
         .card-text{
-                        position: relative;
-                        top: 217px;
-                        left: 10px;
-                        display:inline-block;
+                position: relative;
+                top: 217px;
+                left: 10px;
+                display: flex;
+                justify-content: space-between;
+
+                .dots{
+                        position: absolute;
+                        right: 30px;
+                }
         }
 
         .card-btn{

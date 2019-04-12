@@ -71,6 +71,7 @@ export class CommunicationComponent extends React.Component {
     const { auth } = this.props;
     this.props.fetchMessages(auth.data);
     window.addEventListener('scroll', this.handleScroll);
+    this.closeMobileNav();
   }
 
   handleMobileToggle(status) {
@@ -179,7 +180,6 @@ export class CommunicationComponent extends React.Component {
       this.handleMobileToggle(false);
     }
     if (nextProps.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || nextProps.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL || nextProps.message.type === messageAction.GET_MESSAGE_SUCCESSFUL) {
-      this.closeMobileNav();
       const messages = Object.keys(nextProps.message.messages).map((val) => {
         const data = { ...nextProps.message.messages[val] };
         data.id = val;

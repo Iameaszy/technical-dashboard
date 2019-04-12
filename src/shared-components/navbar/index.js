@@ -47,17 +47,17 @@ export class Navbar extends React.PureComponent {
         {
           type === toggleActions.TOGGLE && show === true
             ? (
-              <p className="left-block" style={{ marginLeft: '70px' }}>
+              <p className="left-block" style={{ marginLeft: '260px' }}>
 
-                <span className="bars-icon" onClick={this.onToggleClick}><FaBars /></span>
+                <span className="bars-icon" onClick={this.onToggleClick}><FaBars size={28} /></span>
 
                 <div><a href="/" title="Reporter"><img className="logo" src={Logo} alt="Logo" /></a></div>
               </p>
             )
             : (
-              <p className="left-block" style={{ marginLeft: '260px' }}>
+              <p className="left-block" style={{ marginLeft: '70px' }}>
 
-                <span className="bars-icon" onClick={this.onToggleClick}><FaBars /></span>
+                <span className="bars-icon" onClick={this.onToggleClick}><FaBars size={28} /></span>
 
                 <div><a href="/" title="Reporter"><img className="logo" src={Logo} alt="Logo" /></a></div>
               </p>
@@ -78,7 +78,7 @@ export class Navbar extends React.PureComponent {
             <span className="power-off-icon" title="logout"><FaPowerOff /></span>
           </div>
           <div className="mobile-toggle">
-            <span className="toggle-icon" onClick={this.onMobileNavClick}><FaBars /></span>
+            <span className="toggle-icon" onClick={this.onMobileNavClick}><FaBars size={21} /></span>
           </div>
 
         </div>
@@ -121,7 +121,7 @@ export class Navbar extends React.PureComponent {
               </span>
               <span className="text">Notice Board</span>
             </li>
-            <li className="nav-list" onClick={() => this.navigate('/logout')}>
+            <li className="nav-list" onClick={() => logout()}>
               <span className="icon">
                 <FaPowerOff />
               </span>

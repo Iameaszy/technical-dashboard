@@ -56,7 +56,7 @@ export class MessagePage extends React.PureComponent {
                   <h4 className="date">{moment(message.date).toLocaleString()}</h4>
                   <p className="message">{message.message}</p>
                 </section>
-                <Link to="/communications"><FaArrowCircleLeft size={28} /></Link>
+                <Link to="/communication"><FaArrowCircleLeft size={28} /></Link>
               </React.Fragment>
               )
         }
