@@ -14,7 +14,23 @@ export class Home extends React.Component {
     this.state = { reports: [], noMoreReports: false };
     this.handleScroll = this.handleScroll.bind(this);
     this.closeMobileNav = this.closeMobileNav.bind(this);
+    this.toggleControls = this.toggleControls.bind(this);
     this.windowEvent = null;
+  }
+
+
+  toggleControls(id) {
+    const reports = this.state.reports.map((val) => {
+      if (val.id === id) {
+        if (val.control) {
+          val.control = false;
+        } else {
+          val.control = true;
+        }
+      }
+      return val;
+    });
+    this.setState({ reports });
   }
 
   handleScroll(e) {
@@ -39,6 +55,7 @@ export class Home extends React.Component {
       const reports = Object.keys(this.props.reports).map((val, ind) => {
         const data = { ...this.props.reports[val] };
         data.id = val;
+        data.control = false;
         return data;
       });
       this.setState({ reports }, () => {
@@ -52,12 +69,12 @@ export class Home extends React.Component {
 
   updateReports() {
     const { reports } = this.state;
-    this.props.fetchFacilityReports(reports.length + 5);
+    this.props.fetchFacilityReports(reports.length + 20);
   }
 
   render() {
     const { noMoreReports, reports } = this.state;
-    const { type, toggle } = this.props;
+    const { type, toggle, deleteReport } = this.props;
     return (
       <React.Fragment>
         <FacilityStyle>
@@ -73,7 +90,7 @@ export class Home extends React.Component {
             {
            reports.map((val, ind) => (
              <div key={ind} className={`col xs-12 msm-6 md-4 ${toggle.show ? 'lg-3' : 'lg-4'}`}>
-               <Card {...val} />
+               <Card {...val} toggleControls={this.toggleControls} deleteReport={deleteReport} />
              </div>
            ))
         }
@@ -104,6 +121,9 @@ const mapDispatchToProps = dispatch => ({
   },
   closeMobileNavigation: () => {
     dispatch({ type: toggleActions.TOGGLE, nav: false });
+  },
+  deleteReport: (id) => {
+    dispatch(reportMethods.deleteReport(id));
   },
 });
 

@@ -46,6 +46,24 @@ export default (state = init, payload) => {
         report: payload.report,
       };
 
+    case reportActions.DELETE_REPORT_REQUEST:
+      return {
+        ...state,
+        type: reportActions.DELETE_REPORT_REQUEST,
+      };
+
+    case reportActions.DELETE_REPORT_FAILED:
+      return {
+        ...state,
+        type: reportActions.DELETE_REPORT_FAILED,
+        report: payload.report,
+      };
+    case reportActions.DELETE_REPORT_SUCCESSFUL:
+      return {
+        ...state,
+        type: reportActions.DELETE_REPORT_SUCCESSFUL,
+      };
+
     case reportActions.GET_FACILITY_REPORTS_REQUEST:
       return {
         ...state,

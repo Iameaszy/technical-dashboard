@@ -8,6 +8,11 @@ export const NoticeStyle = styled.div`
         padding: 40px 60px;
         border:solid 1px lightgray;
         position:relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
 
         .success-alert{
                 margin: 0;
@@ -16,8 +21,8 @@ export const NoticeStyle = styled.div`
                 color: #248024;
         }
         .title{
-            font-weight: 100;
             margin-bottom: 20px;
+            color:#c54fca;
         }
         .btn{
                 padding: 10px 30px;
@@ -30,11 +35,14 @@ export const NoticeStyle = styled.div`
 
                     &:hover{
                         background:#5555b5;
-                        }
+                    }
                 }
         }
         .dropzone-wrapper{
-            padding:10px;
+            box-shadow: 0 0 2px 2px lightgrey;
+            border-radius: 5px;
+            padding: 30px 50px;
+            margin-bottom: 50px;
             .file-upload-container{
                 position:relative;
                 border:solid 1px lightgray;
@@ -74,15 +82,13 @@ export const NoticeStyle = styled.div`
                         }
                 }
             }
-        }
+        }   
         .text-wrapper{
-            padding:10px;
             position: relative;
+            box-shadow: 0 0 2px 2px lightgrey;
+            border-radius: 5px;
+            padding: 30px 50px;
            
-            
-            @media only screen and (max-width: 767px){
-                top: -58px;
-            }
             .title{
                 margin-bottom:25px;
             }

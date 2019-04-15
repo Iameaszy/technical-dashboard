@@ -6,6 +6,7 @@ import { CardStyle } from './card.style';
 const Card = (props) => {
   const { report_type: reportType, ...rest } = props;
   const imgSrc = rest.image_url;
+
   return (
     <CardStyle className="card">
       <div className="text-img-wrapper">
@@ -20,7 +21,12 @@ const Card = (props) => {
         <p>
           {rest.report_message.slice(0, 20)}
         </p>
-        <p className="dots"><FaEllipsisV /></p>
+        <div className="dots" onClick={() => rest.toggleControls(rest.id)}>
+          <p><FaEllipsisV /></p>
+          <div style={{ display: `${rest.control ? 'block' : 'none'}` }} className="control">
+            <div className="delete" onClick={() => rest.deleteReport(rest.id)}>Delete</div>
+          </div>
+        </div>
       </div>
 
       <p className="card-status">{JSON.parse(rest.seen) ? <FaEye color="#257525" size={28} /> : <FaEye color="rgba(0,0,0,0.5)" size={28} />}</p>

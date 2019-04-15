@@ -26,7 +26,7 @@ export const HomeStyle = styled.div`
             background:white;
             padding:20px;
             width:100%;
-            border:solid 1px lightgray
+            border:solid 1px lightgray;
 
             .col{
                 padding:10px;
@@ -36,4 +36,20 @@ export const HomeStyle = styled.div`
                     padding:0px;
                 }
         }
+`;
+
+export const DeleteLoader = styled.p`
+    background: #b1b152;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    line-height: 1.2;
+    margin-bottom: 0;
+    left: 0;
+    right: 0;
+    width: 110px;
+    margin: auto;
 `;

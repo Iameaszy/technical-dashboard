@@ -100,8 +100,8 @@ export class NoticePage extends React.Component {
     const allFieldsAreValid = validCount === formKeys.length;
     return (
       <NoticeStyle>
-        <h3 className="title">Notice Board</h3>
-        <div className="xs-12 md-6 dropzone-wrapper">
+        <div className="xs-12 md-8 dropzone-wrapper">
+          <h3 className="title">Notice Board</h3>
           <section className="file-upload-container">
             <Dropzone
               onDrop={this.onDrop}
@@ -164,8 +164,8 @@ export class NoticePage extends React.Component {
 
           </aside>
         </div>
-
-        <div className="xs-12 md-6 text-wrapper">
+        <div className="clearfix" />
+        <div className="xs-12 md-8 text-wrapper">
           <h3 className="title">Notice Message</h3>
           <form
             className="form"

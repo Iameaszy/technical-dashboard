@@ -43,6 +43,7 @@ color:white;
     color: #000;
     margin-top:70px;
     padding:40px;
+    position:relative;
 
     @media only screen and (max-width: 991px){
         padding:0;

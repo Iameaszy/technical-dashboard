@@ -62,6 +62,25 @@ export const CardStyle = styled.div`
                 .dots{
                         position: absolute;
                         right: 30px;
+                        cursor:pointer;
+
+                        .control{
+                                position: absolute;
+                                left: -64px;
+                                top: -41px;
+                                background: #ffd9d9;
+                                padding: 10px;
+                                border-radius: 5px;
+                                color:#d84d4d;
+                                &:hover{
+                                        background: #b13434;
+                                        color: white;
+                                }
+
+                                .delete{
+                                        cursor: pointer;
+                                }
+                        }
                 }
         }
 
