@@ -10,11 +10,18 @@ export const FacilityStyle = styled.div`
             line-height:3;
             .title{
                 font-size:18px;
+                @media only screen and (max-width: 767px){
+                    margin:auto;
+                }
             }
 
             .breadcrumb{
                 position: absolute;
                 right: 0;
+
+                .facility-crumb{
+                    color:#444;
+                }
             }
         }
 

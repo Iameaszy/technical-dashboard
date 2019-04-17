@@ -56,6 +56,24 @@ export const signin = obj => (dispatch) => {
   });
 };
 
+export const forgetPassword = obj => (dispatch) => {
+  dispatch({ type: authActions.FORGOT_PASSWORD_REQUEST });
+
+  Auth.sendPasswordResetEmail(obj.email).then(() => {
+    dispatch({
+      type: authActions.FORGOT_PASSWORD_SUCCESSFUL,
+    });
+    dispatch({
+      type: modal_actions.SHOW_NOTHING,
+    });
+  }).catch((err) => {
+    dispatch({
+      type: authActions.FORGOT_PASSWORD_FAILED,
+      message: err.message,
+    });
+  });
+};
+
 export const signup = obj => async (dispatch) => {
   dispatch({ type: authActions.SIGNUP_REQUEST });
   const newObj = {};
@@ -93,6 +111,5 @@ export const signout = () => {
 };
 
 
-export const forgetPassword = () => {};
 export const resetPassword = () => {};
 export const verifyEmail = () => {};

@@ -12,7 +12,19 @@ export const List = (props) => {
   } = props;
   const myDate = moment(date || []);
   return (
-    <ListStyle dataMsgID={uid} onClick={() => onMessageClicked(id)}>
+    <ListStyle
+      dataMsgID={uid}
+      onClick={(e) => {
+        console.dir(e.target);
+        switch (e.target.tagName) {
+          case 'INPUT': onMessageChecked(id); break;
+          case 'svg': onStarChecked(id); break;
+          case 'DIV':
+          case 'LI': onMessageClicked(id); break;
+        }
+        e.stopPropagation();
+      }}
+    >
       <p
         className="mobile-li"
         onClick={(e) => {
@@ -24,9 +36,6 @@ export const List = (props) => {
         <div className="group">
           <input
             checked={checked}
-            onChange={() => {
-              onMessageChecked(id);
-            }}
             className="message-select"
             id=""
             type="checkbox"
@@ -34,9 +43,6 @@ export const List = (props) => {
           />
 
           <FaRegStar
-            onClick={() => {
-              onStarChecked(id);
-            }}
             style={{ color: important ? 'black' : '#a2a1a1' }}
             className="star"
           />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Footer from '../shared-components/footer';
+import NavbarPage from '../shared-components/navbar';
 
 
 import ModalLayout from './modal.layout';
@@ -14,6 +15,7 @@ const DefaultLayout = ({ component: Component, ...rest }) => {
       render={matchProps => (
         <div className="DefaultLayout">
           <ModalLayout />
+          <NavbarPage />
           <Component {...matchProps} />
           <Footer />
         </div>

@@ -11,11 +11,18 @@ export const SecurityStyle = styled.div`
 
             .title{
                 font-size:18px;
+                @media only screen and (max-width: 767px){
+                    margin:auto;
+                }
             }
 
             .breadcrumb{
                 position: absolute;
                 right: 0;
+
+                .security-crumb{
+                    color:#444;
+                }
             }
         }
 

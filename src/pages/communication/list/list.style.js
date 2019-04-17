@@ -11,13 +11,19 @@ export const ListStyle = styled.li`
         cursor:pointer;
         transition:0.6 all;
         position:relative;
+        pointer-events:none;
 
+        @media (max-width:656px){
+            pointer-events:auto;
+        }
         .mobile-li{
             position: absolute;
-            width: 100%;
+            width: 95%;
             top: 0;
+            left:60px;
             bottom: 0;
             z-index: 1;
+            pointer-events:auto;
 
             @media (max-width:656px){
                 display:none;
@@ -72,6 +78,7 @@ export const ListStyle = styled.li`
             display: flex;
             align-items: center;
             width:100%;
+            pointer-events:auto;
            @media (max-width:656px){
                 display: flex;
                 flex-direction: column;

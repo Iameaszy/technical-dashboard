@@ -4,9 +4,9 @@ import { FaEye, FaEllipsisV } from 'react-icons/fa';
 import { CardStyle } from './card.style';
 
 const Card = (props) => {
-  const { report_type: reportType, ...rest } = props;
+  const { report_type: reportType, report, ...rest } = props;
   const imgSrc = rest.image_url;
-
+  console.log('report', rest);
   return (
     <CardStyle className="card">
       <div className="text-img-wrapper">
@@ -29,7 +29,7 @@ const Card = (props) => {
         </div>
       </div>
 
-      <p className="card-status">{JSON.parse(rest.seen) ? <FaEye color="#257525" size={28} /> : <FaEye color="rgba(0,0,0,0.5)" size={28} />}</p>
+      <p className="card-status" onClick={() => rest.markAsSeen(report)}>{JSON.parse(rest.seen) ? <FaEye color="#257525" size={28} /> : <FaEye color="rgba(0,0,0,0.5)" size={28} />}</p>
       <Link to={`/card?id=${rest.id}`} className="card-btn xs-12 sm-off-0"> View </Link>
     </CardStyle>
   );

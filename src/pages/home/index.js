@@ -77,6 +77,7 @@ export class Home extends React.Component {
   render() {
     const {
       type, action, toggle, deleteReport,
+      markReportAsSeen,
     } = this.props;
     const { reports, noMoreReports } = this.state;
     return (
@@ -95,7 +96,7 @@ export class Home extends React.Component {
             {
            reports.map((val, ind) => (
              <div key={ind} className={`col xs-12 msm-6 md-4 ${toggle.show ? 'lg-3' : 'lg-4'}`}>
-               <Card {...val} toggleControls={this.toggleControls} deleteReport={deleteReport} />
+               <Card {...val} report={val} markAsSeen={markReportAsSeen} toggleControls={this.toggleControls} deleteReport={deleteReport} />
              </div>
            ))
         }
@@ -131,6 +132,7 @@ const mapDispatchToProps = dispatch => ({
   deleteReport: (id) => {
     dispatch(reportMethods.deleteReport(id));
   },
+  markReportAsSeen: report => dispatch(reportMethods.markAsSeen(report)),
 });
 
 export default connect(mapStatesToProps,
