@@ -9,7 +9,7 @@ import Facility from './pages/facility_report';
 import Security from './pages/security_reports';
 import NotFound from './pages/errors/not-found';
 import Communication from './pages/communication';
-import NoticePage from './pages/notice';
+import Notice from './pages/notice';
 import signin from './pages/auth/signin';
 import signup from './pages/auth/signup';
 import forgotPassword from './pages/auth/forgot-password';
@@ -32,25 +32,23 @@ const Routes = () => (
         <DashboardLayout component={Facility} exact path="/facility" />
         <DashboardLayout component={Security} exact path="/security" />
         <DashboardLayout component={Communication} exact path="/communication" />
-        <DashboardLayout component={NoticePage} exact path="/notice" />
-        <DefaultLayout
+        <DashboardLayout component={Notice} exact path="/notice" />
+        <Route
           component={forgotPassword}
-          exact
           path="/forgot/password"
         />
-        <DefaultLayout component={signin} exact path="/session/new" />
 
         <DefaultLayout
           component={passwordReset}
           path="/user/password/reset"
         />
 
-        <DefaultLayout component={VerifyEmail} path="/user/verify/email" />
+        <Route component={VerifyEmail} path="/user/verify/email" />
         <Route component={signin} exact path="/signin" />
         <Route component={signup} exact path="/signup" />
         <DashboardLayout component={SingleCardComponent} exact path="/card" />
         <DashboardLayout component={MessagePage} exact path="/communication/message" />
-        <DefaultLayout component={NotFound} />
+        <Route component={NotFound} />
       </Switch>
     </Suspense>
   </Router>

@@ -1,29 +1,39 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    background:#f1f2f7;
-  #error{
-    color:coral;
+  background: #f1f2f7;
+  #error {
+    color: coral;
   }
 
-  .logo{
+  .logo {
     display: block;
     width: 150px;
     height: 150px;
     border-radius: 100%;
     margin: auto;
-    margin-bottom:1rem;
+    margin-bottom: 1rem;
   }
-  .forgot-password{
-        margin: auto;
-        width: 100%;
+  .login-link {
+    color: dimgray;
+    font-size: 13px;
+  }
 
-        img{
-          object-fit: contain;
-          object-position: center;
-        }
-    .text{
-      margin-bottom:1rem;
+  .forgot-password {
+    margin: auto;
+    width: 100%;
+    margin-top: 50px;
+
+    .title {
+      margin-bottom: 0.5rem !important;
+      font-size: 1.5rem;
+    }
+    img {
+      object-fit: contain;
+      object-position: center;
+    }
+    .text {
+      margin-bottom: 1rem;
       color: #888;
     }
   }
@@ -32,31 +42,31 @@ export default styled.div`
     background: white;
     padding: 2em;
 
-    .welcome{
-      margin-bottom:0;
+    .welcome {
+      margin-bottom: 0;
     }
-    .notice{
+    .notice {
       font-weight: 300;
       font-size: 1.4rem;
       color: #5d5959;
-      text-align:center;
+      text-align: center;
     }
     @media (min-width: 768px) {
       border-radius: 5px;
     }
 
-    .form-group-checkbox{
+    .form-group-checkbox {
       padding: 0 0.775em;
       width: 100%;
       display: flex;
       flex-direction: row-reverse;
-      justify-content:flex-end;
+      justify-content: flex-end;
 
-      .remember-label{
-        font-size:smaller;
-        color:#777777;
+      .remember-label {
+        font-size: smaller;
+        color: #777777;
       }
-      input[type='checkbox'] {
+      input[type="checkbox"] {
         -webkit-appearance: none;
         width: 20px;
         height: 20px;
@@ -65,9 +75,9 @@ export default styled.div`
         border: 2px solid #8080ef;
         margin-right: 10px;
       }
-      input[type='checkbox']:checked {
-            background: #abd;
-        }
+      input[type="checkbox"]:checked {
+        background: #abd;
+      }
     }
     .form-group {
       padding: 0.775em;
@@ -97,7 +107,7 @@ export default styled.div`
         padding: 0.9em 4.95em;
         letter-spacing: 0.5px;
         font-family: AvantGarde;
-        width:100%;
+        width: 100%;
 
         &:hover,
         &:active,
@@ -106,7 +116,6 @@ export default styled.div`
         }
       }
     }
-    
 
     .form-control {
       width: 100%;
@@ -119,8 +128,7 @@ export default styled.div`
       &.not-valid {
         border-color: pink;
       }
-     
-     
+
       // &:active,
       // &:focus {
       //   border-color: #009d91;
@@ -132,10 +140,10 @@ export default styled.div`
     }
   }
 
-  .g-btn{
-    margin-right:0;
-    &>span{
-      width:100%;
+  .g-btn {
+    margin-right: 0;
+    & > span {
+      width: 100%;
     }
   }
 
@@ -144,8 +152,31 @@ export default styled.div`
     text-decoration: none;
     color: #777777;
     display: block;
+    margin-bottom: 0;
   }
 
+  .signup-title {
+    text-align: left;
+    font-size: 23px;
+    color: #655f5f;
+  }
+
+  .signup-text {
+    display: block;
+    text-align: left;
+    color: darkgray;
+    font-size: 13px;
+  }
+
+  .header {
+    background: linear-gradient(to left, #ff8e97, #8b34cc);
+    padding: 5px 70px;
+    .header-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 100%;
+    }
+  }
   .big {
     font-size: 18.5px;
     text-decoration: none;
@@ -198,8 +229,8 @@ export default styled.div`
     }
   }
 
-.social-btn-container{
-    padding:20px;;
-    margin:0;
+  .social-btn-container {
+    padding: 20px;
+    margin: 0;
   }
 `;

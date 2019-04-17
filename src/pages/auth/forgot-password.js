@@ -2,13 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import SharedStyling from "./styles/shared";
 
-import { withRouter } from "react-router-dom";
+import { withRouter,Link } from "react-router-dom";
 import { validator } from "../../helpers/utils";
 
 import auth_actions from "../../redux/actions/auth";
 
 import Icon from "react-fa";
 import { forgetPassword } from "../../redux/action-creators/auth";
+
+import Logo from '../../assets/logo.jpg';
+
 
 class ForgotPasswordPage extends React.PureComponent {
   constructor(props) {
@@ -64,22 +67,16 @@ class ForgotPasswordPage extends React.PureComponent {
 
     return (
       <SharedStyling className="xs-12 i">
+      <header className="header">
+         <Link to="/" ><img src={Logo} alt="Logo" className="header-logo"/></Link>
+      </header>
         <div className="c-w">
-          <div className="c t-c">
+          <div className="c t-l">
             <div className="forgot-password">
-              <p className="image-container">
-                <img
-                  src="../../assets/logo.plain.png"
-                  width="140"
-                  height="80"
-                  alt="Logo"
-                />
-              </p>
-              <h3 className="text">Forgot Password?</h3>
+              <h3 className="title text xs-10 sm-8 md-6 md-off-3 sm-off-2 xs-off-1 ">Forgot Password?</h3>
 
               <p className="text xs-10 sm-8 md-6 md-off-3 sm-off-2 xs-off-1">
-                Enter the email address you used when you joined and we’ll send
-                you instructions to reset your password.
+                Enter your email address to reset your password
               </p>
             </div>
             <form
@@ -115,6 +112,7 @@ class ForgotPasswordPage extends React.PureComponent {
                     Send Reset Instructions
                   </button>
                 )}
+                <Link className="login-link" to="/signin">Login with your account</Link>
               </div>
 
               <div className="form-group ">

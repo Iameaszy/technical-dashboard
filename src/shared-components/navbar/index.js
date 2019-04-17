@@ -65,7 +65,7 @@ export class Navbar extends React.PureComponent {
         }
 
         <div className="right-block">
-          <div className="message"><FaEnvelope /></div>
+          <div className="message">{/* <FaEnvelope /> */}</div>
           <div className="logout">
             <span
               onClick={() => {
@@ -75,7 +75,16 @@ export class Navbar extends React.PureComponent {
             >
             Logout
             </span>
-            <span className="power-off-icon" title="logout"><FaPowerOff /></span>
+            <span
+              className="power-off-icon"
+              title="logout"
+              onClick={() => {
+                logout();
+              }}
+            >
+              <FaPowerOff />
+
+            </span>
           </div>
           <div className="mobile-toggle">
             <span className="toggle-icon" onClick={this.onMobileNavClick}><FaBars size={21} /></span>

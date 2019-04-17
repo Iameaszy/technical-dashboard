@@ -110,14 +110,12 @@ export default (state = initState, payload) => {
       return {
         ...state,
         type: auth_actions.FORGOT_PASSWORD_SUCCESSFUL,
-        message: payload.message,
-        data: { ...state.data, ...payload.data },
       };
     case auth_actions.FORGOT_PASSWORD_FAILED:
       return {
         ...state,
         type: auth_actions.FORGOT_PASSWORD_FAILED,
-        data: payload.user,
+        message: payload.message,
       };
 
     case auth_actions.PASSWORD_RESET_REQUEST:

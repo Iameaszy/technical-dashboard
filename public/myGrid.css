@@ -12,6 +12,10 @@
   float: left;
 }
 
+.mb-0{
+  margin-bottom: 0 !important;
+}
+
 .xs-off-half {
   margin-left: 4.165%;
 }

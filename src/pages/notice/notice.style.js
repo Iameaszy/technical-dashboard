@@ -5,7 +5,7 @@ export const NoticeStyle = styled.div`
         line-height:initial;
         width:100%;
         text-align: left;
-        padding: 40px 60px;
+        padding: 4% 6%;
         border:solid 1px lightgray;
         position:relative;
         display: flex;
@@ -41,7 +41,7 @@ export const NoticeStyle = styled.div`
         .dropzone-wrapper{
             box-shadow: 0 0 2px 2px lightgrey;
             border-radius: 5px;
-            padding: 30px 50px;
+            padding: 3% 5%;
             margin-bottom: 50px;
             .file-upload-container{
                 position:relative;
@@ -87,7 +87,7 @@ export const NoticeStyle = styled.div`
             position: relative;
             box-shadow: 0 0 2px 2px lightgrey;
             border-radius: 5px;
-            padding: 30px 50px;
+            padding: 3% 5%;
            
             .title{
                 margin-bottom:25px;
