@@ -1,17 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  FaRegEnvelope, FaShare, FaRegFile, FaRegStar,
+  FaRegEnvelope, FaShare, FaRegFile, FaRegStar, FaPen,
 } from 'react-icons/fa';
 
 import { createGlobalStyle } from 'styled-components';
 import moment from 'moment';
 import toggleActions from '../../redux/actions/toggle';
-
 import {
   CommSideStyle, CommStyle, MainCommStyle,
 } from './communication.style';
-import ComposeComponent from './compose/index';
+import ComposePage from './compose/index';
 import modalActions from '../../redux/actions/modals';
 import * as messageActionCreators from '../../redux/action-creators/message';
 import * as NotificationComponents from '../../shared-components/notification/index';
@@ -270,6 +269,9 @@ export class CommunicationComponent extends React.Component {
             </ul>
           </CommSideStyle>
           <MainCommStyle className="xs-12">
+            <div className="compose-mobile">
+              <FaPen size={21} />
+            </div>
             {(this.props.message.type === messageAction.GET_MESSAGES_SUCCESSFUL || this.props.message.type === messageAction.STAR_MESSAGE_SUCCESSFUL || this.props.message.type === messageAction.SEND_MESSAGE_SUCCESSFUL) && messages.map((val, ind) => <List getMessage={getMessage} onMessageClicked={this.onMessageClicked} onStarChecked={this.onStarChecked} key={ind} {...val} onMessageChecked={this.onMessageChecked} />)
               }
 
@@ -296,7 +298,7 @@ export class CommunicationComponent extends React.Component {
           </MainCommStyle>
           {
             type === modalActions.SHOW_COMPOSE_MESSAGE && show
-            && <ComposeComponent sendMessage={sendMessage} message={message} auth={auth} close={closeCompose} />
+            && <ComposePage sendMessage={sendMessage} message={message} auth={auth} close={closeCompose} />
           }
         </CommStyle>
       </React.Fragment>

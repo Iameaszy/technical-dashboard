@@ -71,7 +71,25 @@ export const MainCommStyle = styled.ul`
     height: 424px;
     overflow-y: auto;
     margin:0;
+    position:relative;
 
+    .compose-mobile{
+        background: #d6529e;
+        width: 3.125rem;
+        height: 3.125rem;
+        position: absolute;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color:white;
+        right: 6%;
+        top: 48vh;
+
+        a{
+            color:white;
+        }
+    }
     .message-wrapper{
         line-height: 1.2;
         text-align: left;
